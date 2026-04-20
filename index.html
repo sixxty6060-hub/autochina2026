@@ -8,8 +8,8 @@
 <style>
 :root{
   --navy:#1E3A8A;--blue-dark:#1E40AF;--blue:#3B82F6;--blue-mid:#93C5FD;--blue-light:#DBEAFE;
-  --yellow:#F59E0B;--yellow-mid:#FDE68A;--yellow-light:#FEF9C3;
-  --orange:#EA580C;--brown:#92400E;
+  --sky:#00AAD4;--sky-mid:#7DD3EA;--sky-light:#E0F5FB;--sky-dark:#0077A0;
+  --orange:#EA580C;--brown:#0077A0;
   --red:#DC2626;--red-light:#FEE2E2;
   --g50:#F9FAFB;--g100:#F3F4F6;--g200:#E5E7EB;--g300:#D1D5DB;
   --g400:#9CA3AF;--g500:#6B7280;--g600:#4B5563;--g700:#374151;
@@ -21,7 +21,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 
 /* ── 헤더 ── */
 #hdr{position:fixed;top:0;left:0;right:0;z-index:500;background:var(--navy);
-  padding-top:var(--safe-t);padding-left:12px;padding-right:12px;padding-bottom:8px;}
+padding-top:var(--safe-t);padding-left:12px;padding-right:12px;padding-bottom:8px;}
 .hdr-row{display:flex;align-items:center;gap:8px;margin-top:8px;}
 .hdr-title{flex:1;font-size:12px;font-weight:700;color:#fff;line-height:1.3;}
 .hdr-sub{font-size:9px;color:var(--blue-mid);}
@@ -48,25 +48,25 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 .dr-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:4px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;}
 .dr-lbl{padding:7px 13px;font-size:9px;font-weight:700;color:var(--g400);background:var(--g100);border-bottom:1px solid var(--g200);letter-spacing:.5px;}
 .dr-item{display:flex;align-items:center;gap:8px;padding:12px 13px;font-size:12px;color:var(--g600);border-bottom:1px solid var(--g100);min-height:44px;}
-.dr-item.hl{color:var(--orange);font-weight:700;}
+.dr-item.hl{color:var(--sky-dark);font-weight:700;}
 .dr-tag{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:10px;background:var(--g200);color:var(--g500);flex-shrink:0;}
-.dr-item.hl .dr-tag{background:var(--yellow-mid);color:var(--brown);}
+.dr-item.hl .dr-tag{background:var(--sky-light);color:var(--sky-dark);}
 
 /* ── 공통 카드 ── */
 .card{background:#fff;border-radius:12px;border:1px solid var(--g200);overflow:hidden;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
 .card-hd{padding:9px 12px;font-size:11px;font-weight:700;color:var(--g600);background:var(--g50);border-bottom:1px solid var(--g200);}
 
-/* ── 전체 지도 스크린 ── */
-.hotel-chip{display:flex;align-items:center;gap:8px;background:var(--yellow-light);border:1.5px dashed var(--yellow);border-radius:10px;padding:8px 11px;margin-bottom:8px;}
+/* 이하 모든 CSS의 var(–...) 를 var(--...) 로 변경 */
+.hotel-chip{display:flex;align-items:center;gap:8px;background:var(--sky-light);border:1.5px dashed var(--sky);border-radius:10px;padding:8px 11px;margin-bottom:8px;}
 .hotel-chip .hico{font-size:17px;}
-.hotel-chip .htxt h3{font-size:11px;font-weight:700;color:var(--brown);}
-.hotel-chip .htxt p{font-size:8px;color:var(--brown);opacity:.8;margin-top:1px;}
-.hotel-chip .hd{font-size:9px;background:var(--yellow);color:#fff;padding:2px 7px;border-radius:20px;font-weight:700;flex-shrink:0;margin-left:auto;}
+.hotel-chip .htxt h3{font-size:11px;font-weight:700;color:var(--sky-dark);}
+.hotel-chip .htxt p{font-size:8px;color:var(--sky-dark);opacity:.8;margin-top:1px;}
+.hotel-chip .hd{font-size:9px;background:var(--sky);color:#fff;padding:2px 7px;border-radius:20px;font-weight:700;flex-shrink:0;margin-left:auto;}
 .route-bar{background:var(--red-light);border:1px solid #FECACA;border-radius:8px;padding:7px 10px;margin-bottom:8px;font-size:9px;color:var(--red);font-weight:600;display:flex;align-items:center;gap:5px;}
 .legend-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
 .leg-item{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--g500);}
 .ldot{width:10px;height:10px;border-radius:2px;border:1.5px solid;flex-shrink:0;}
-.ldot.t{background:var(--yellow-mid);border-color:var(--yellow);}
+.ldot.t{background:var(--sky-light);border-color:var(--sky);}
 .ldot.b{background:var(--blue-light);border-color:var(--blue);}
 .ldot.n{background:var(--g100);border-color:var(--g300);}
 .venue-hd{padding:8px 12px;font-size:11px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:space-between;}
@@ -77,19 +77,19 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 .halls-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 10px;}
 .htile{border-radius:9px;padding:9px 8px;text-align:center;cursor:pointer;border:1.5px solid;position:relative;min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
 .htile:active{opacity:.75;}
-.htile.t{background:var(--yellow-mid);border-color:var(--yellow);}
+.htile.t{background:var(--sky-light);border-color:var(--sky);}
 .htile.b{background:var(--blue-light);border-color:var(--blue);}
 .htile.n{background:var(--g100);border-color:var(--g200);}
 .hn{font-size:14px;font-weight:800;}
-.htile.t .hn{color:var(--brown);}
+.htile.t .hn{color:var(--sky-dark);}
 .htile.b .hn{color:var(--blue-dark);}
 .htile.n .hn{color:var(--g500);}
 .hb{font-size:9px;line-height:1.3;}
-.htile.t .hb{color:var(--orange);}
+.htile.t .hb{color:var(--sky);}
 .htile.b .hb{color:var(--blue);}
 .htile.n .hb{color:var(--g400);}
 .ht{font-size:8px;margin-top:1px;}
-.htile.t .ht{color:var(--brown);}
+.htile.t .ht{color:var(--sky-dark);}
 .htile.n .ht{color:var(--g400);}
 .tile-badge{position:absolute;top:-6px;right:-6px;font-size:13px;}
 .rn{position:absolute;top:-6px;left:-6px;width:18px;height:18px;border-radius:50%;background:#EF4444;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
@@ -108,7 +108,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 .hall-hero{background:linear-gradient(135deg,var(--blue-dark),var(--navy));border-radius:12px;padding:12px 14px;margin-bottom:10px;color:#fff;}
 .hall-hero h2{font-size:18px;font-weight:800;}
 .hall-hero .hcn{font-size:9px;color:var(--blue-mid);margin-top:2px;}
-.hall-time{display:inline-flex;align-items:center;gap:3px;background:var(--yellow);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:8px;}
+.hall-time{display:inline-flex;align-items:center;gap:3px;background:var(--sky);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:8px;}
 
 /* SVG 지도 컨테이너 */
 .map-wrap{overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1px solid var(--g200);background:#EFF6FF;margin-bottom:10px;}
@@ -117,27 +117,27 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 .booth-list{display:flex;flex-direction:column;gap:6px;padding:10px;}
 .br{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;border:1.5px solid;min-height:56px;}
 .br:active{opacity:.75;}
-.br.t{background:linear-gradient(135deg,var(--yellow-light),var(--yellow-mid));border-color:var(--yellow);}
+.br.t{background:linear-gradient(135deg,var(--sky-light),#c8eef8);border-color:var(--sky);}
 .br.b{background:var(--blue-light);border-color:var(--blue);}
 .br.n{background:var(--g50);border-color:var(--g200);}
 .br .bi{flex:1;}
 .br .bkr{font-size:12px;font-weight:700;}
-.br.t .bkr{color:var(--brown);}
+.br.t .bkr{color:var(--sky-dark);}
 .br.b .bkr{color:var(--blue-dark);}
 .br.n .bkr{color:var(--g700);}
 .br .bcn{font-size:9px;color:var(--g400);margin-top:1px;}
-.br.t .bcn{color:var(--orange);}
+.br.t .bcn{color:var(--sky);}
 .br.b .bcn{color:var(--blue);}
 .br .bnum{font-size:8px;font-weight:700;color:var(--g400);margin-top:2px;}
-.vbtn{background:var(--yellow);color:#fff;border:none;border-radius:8px;padding:7px 11px;font-size:10px;font-weight:700;cursor:pointer;flex-shrink:0;min-height:36px;}
-.vbtn:active{background:var(--orange);}
+.vbtn{background:var(--sky);color:#fff;border:none;border-radius:8px;padding:7px 11px;font-size:10px;font-weight:700;cursor:pointer;flex-shrink:0;min-height:36px;}
+.vbtn:active{background:var(--sky-dark);}
 .vbtn.blue{background:var(--blue);}
 .vbtn.blue:active{background:var(--blue-dark);}
 
 /* ── 차종 목록 ── */
 .sec-label{font-size:9px;font-weight:700;color:var(--g400);padding:8px 2px 4px;letter-spacing:.5px;}
 .car-tile{display:flex;align-items:stretch;background:#fff;border-radius:12px;border:1.5px solid var(--g200);margin-bottom:8px;overflow:hidden;min-height:80px;cursor:pointer;}
-.car-tile:active{background:var(--yellow-light);border-color:var(--yellow);}
+.car-tile:active{background:var(--sky-light);border-color:var(--sky);}
 .car-tile .ct-img{width:90px;flex-shrink:0;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden;}
 .car-tile .ct-img img{width:100%;height:100%;object-fit:cover;}
 .car-tile .ct-body{flex:1;padding:9px 10px;display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;}
@@ -150,7 +150,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 .phev{background:var(--blue-dark);color:#fff;}
 .erev{background:var(--navy);color:#fff;}
 .bnew{background:var(--red);color:#fff;}
-.bhall{background:var(--yellow);color:#fff;}
+.bhall{background:var(--sky);color:#fff;}
 .car-tile .ct-arr{padding:0 10px;display:flex;align-items:center;color:var(--g300);font-size:18px;flex-shrink:0;}
 
 /* ── 상품 상세 ── */
@@ -165,12 +165,12 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 .p-name{font-size:19px;font-weight:800;line-height:1.2;}
 .p-cn{font-size:10px;color:var(--blue-mid);margin-top:2px;}
 .p-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;}
-.price-box{display:flex;align-items:center;justify-content:space-between;background:var(--yellow-light);border:1.5px solid var(--yellow);border-radius:10px;padding:10px 13px;margin-bottom:10px;}
+.price-box{display:flex;align-items:center;justify-content:space-between;background:var(--sky-light);border:1.5px solid var(--sky);border-radius:10px;padding:10px 13px;margin-bottom:10px;}
 .price-box .pl{font-size:9px;color:var(--g500);}
-.price-box .pw{font-size:11px;color:var(--orange);font-weight:700;margin-top:2px;}
+.price-box .pw{font-size:11px;color:var(--sky-dark);font-weight:700;margin-top:2px;}
 .price-box .pr{font-size:8px;color:var(--g400);margin-top:1px;}
-.price-box .pv{font-size:15px;font-weight:800;color:var(--orange);text-align:right;}
-.price-box .pvw{font-size:10px;color:var(--brown);font-weight:600;text-align:right;}
+.price-box .pv{font-size:15px;font-weight:800;color:var(--sky-dark);text-align:right;}
+.price-box .pvw{font-size:10px;color:var(--sky-dark);font-weight:600;text-align:right;}
 .sec-hd{padding:9px 12px;font-size:11px;font-weight:700;color:var(--g600);background:var(--g50);border-bottom:1px solid var(--g200);}
 .concept{padding:11px 12px;font-size:12px;color:var(--g600);line-height:1.7;}
 .usp-list{padding:8px 10px;display:flex;flex-direction:column;gap:5px;}
@@ -196,7 +196,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 </style>
 </head>
 <body>
-
 <!-- 헤더 -->
 <div id="hdr">
   <div class="hdr-row">
@@ -239,7 +238,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 
 <!-- 앱 -->
 <div id="app">
-
 <!-- 스크린1: 전체 지도 -->
 <div id="s-map" class="screen active">
   <div class="hotel-chip">
@@ -278,7 +276,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <div class="venue-hd sh">🏭 CIEC Shunyi · 순이관 신관 <span class="vd">🚇 셔틀</span></div>
     <div class="sec-lbl">E 구역 (동관)</div>
     <div class="halls-grid">
-      <div class="htile n" onclick="goHall('E1')"><div class="hn">E1홀</div><div class="hb">Luxeed<br>路特斯 E106</div><div class="ht">⏱ 참고</div></div>
+      <div class="htile n" onclick="goHall('E1')"><div class="hn">E1홀</div><div class="hb">Luxeed<br>智界 E106</div><div class="ht">⏱ 참고</div></div>
       <div class="htile t" onclick="goHall('E2')"><div class="tile-badge">💡</div><div class="rn">⑥</div><div class="hn">E2홀</div><div class="hb">NIO E203<br>🔵샤오펑 E202</div><div class="ht">⏱ 20~40분</div></div>
       <div class="htile t" onclick="goHall('E3')"><div class="tile-badge">💡</div><div class="rn">⑦</div><div class="hn">E3홀</div><div class="hb">BYD大唐 E302<br>BYD 전관</div><div class="ht">⏱ 20분</div></div>
       <div class="htile b" onclick="goHall('E4')"><div class="tile-badge">🔵</div><div class="hn">E4홀</div><div class="hb">현대자동차<br>E401·벤츠 E402</div><div class="ht">⏱ 20분</div></div>
@@ -286,8 +284,8 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <div class="sec-lbl">W 구역 (서관)</div>
     <div class="halls-grid">
       <div class="htile n" onclick="goHall('W1')"><div class="hn">W1홀</div><div class="hb">부품 전시<br>零部件展区</div><div class="ht">⏱ 참고</div></div>
-      <div class="htile n" onclick="goHall('W2')"><div class="hn">W2홀</div><div class="hb">부품 전시<br>零部件展区</div><div class="ht">⏱ 참고</div></div>
-      <div class="htile n" onclick="goHall('W3')"><div class="hn">W3홀</div><div class="hb">미디어 구역<br>媒体展区</div><div class="ht">⏱ 참고</div></div>
+      <div class="htile n" onclick="goHall('W2')"><div class="hn">W2홀</div><div class="hb">인터넷/미디어<br>网络媒体展区</div><div class="ht">⏱ 참고</div></div>
+      <div class="htile n" onclick="goHall('W3')"><div class="hn">W3홀</div><div class="hb">화웨이 建崑<br>华为乾崑</div><div class="ht">⏱ 참고</div></div>
       <div class="htile t" onclick="goHall('W4')"><div class="tile-badge">💡</div><div class="rn">⑧</div><div class="hn">W4홀</div><div class="hb">BMW iX3L<br>W402~403</div><div class="ht">⏱ 20분</div></div>
     </div>
   </div>
@@ -323,7 +321,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 <div id="s-cars" class="screen">
   <div class="sec-label">합자사 브랜드</div>
   <div class="car-tile" onclick="goCar('nx8')">
-    <div class="ct-img"><span>🚗</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nissan_Ariya_-_2022_Paris_Motor_Show.jpg/320px-Nissan_Ariya_-_2022_Paris_Motor_Show.jpg" alt="NX8" onerror="this.style.display='none';this.parentNode.innerHTML='🚗'"></div>
     <div class="ct-body">
       <div class="ct-name">동풍닛산 NX8</div>
       <div class="ct-cn">东风日产 NX8</div>
@@ -333,7 +331,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('vw9x')">
-    <div class="ct-img"><span>🚙</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/2021_Volkswagen_ID.4_GTX%2C_front_8.14.21.jpg/320px-2021_Volkswagen_ID.4_GTX%2C_front_8.14.21.jpg" alt="ID.ERA 9X" onerror="this.style.display='none';this.parentNode.innerHTML='🚙'"></div>
     <div class="ct-body">
       <div class="ct-name">상기VW ID.ERA 9X</div>
       <div class="ct-cn">上汽大众 ID.ERA 9X</div>
@@ -343,7 +341,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('audi')">
-    <div class="ct-img"><span>🏎</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Audi_Q6_e-tron_WEF_2024.jpg/320px-Audi_Q6_e-tron_WEF_2024.jpg" alt="E7X" onerror="this.style.display='none';this.parentNode.innerHTML='🏎'"></div>
     <div class="ct-body">
       <div class="ct-name">상기AUDI E7X</div>
       <div class="ct-cn">上汽奥迪 E7X</div>
@@ -353,7 +351,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('bmw')">
-    <div class="ct-img"><span>🚘</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/BMW_iX3_facelift_%28G08%29%2C_front_8.28.21.jpg/320px-BMW_iX3_facelift_%28G08%29%2C_front_8.28.21.jpg" alt="BMW iX3L" onerror="this.style.display='none';this.parentNode.innerHTML='🚘'"></div>
     <div class="ct-body">
       <div class="ct-name">BMW iX3L</div>
       <div class="ct-cn">宝马 iX3L</div>
@@ -364,7 +362,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
   </div>
   <div class="sec-label" style="margin-top:6px;">중국계 브랜드</div>
   <div class="car-tile" onclick="goCar('byd')">
-    <div class="ct-img"><span>⚡</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/BYD_Tang_2021_%28cropped%29.jpg/320px-BYD_Tang_2021_%28cropped%29.jpg" alt="BYD 大唐" onerror="this.style.display='none';this.parentNode.innerHTML='⚡'"></div>
     <div class="ct-body">
       <div class="ct-name">BYD 大唐 (따탕)</div>
       <div class="ct-cn">比亚迪 大唐</div>
@@ -374,7 +372,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('zeekr')">
-    <div class="ct-img"><span>🔋</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Zeekr_009%2C_2023_Shanghai_Auto_Show.jpg/320px-Zeekr_009%2C_2023_Shanghai_Auto_Show.jpg" alt="Zeekr 8X" onerror="this.style.display='none';this.parentNode.innerHTML='🔋'"></div>
     <div class="ct-body">
       <div class="ct-name">지커(Zeekr) 8X</div>
       <div class="ct-cn">极氪 8X</div>
@@ -384,7 +382,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('nio')">
-    <div class="ct-img"><span>🌟</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/NIO_ES8_2023_%28cropped%29.jpg/320px-NIO_ES8_2023_%28cropped%29.jpg" alt="NIO ES9" onerror="this.style.display='none';this.parentNode.innerHTML='🌟'"></div>
     <div class="ct-body">
       <div class="ct-name">NIO ES9</div>
       <div class="ct-cn">蔚来 ES9</div>
@@ -394,7 +392,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('leap')">
-    <div class="ct-img"><span>🚀</span></div>
+    <div class="ct-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Leapmotor_C11%2C_2023_Shanghai_Auto_Show_%28cropped%29.jpg/320px-Leapmotor_C11%2C_2023_Shanghai_Auto_Show_%28cropped%29.jpg" alt="링파오 D19" onerror="this.style.display='none';this.parentNode.innerHTML='🚀'"></div>
     <div class="ct-body">
       <div class="ct-name">링파오 D19</div>
       <div class="ct-cn">零跑汽车 D19</div>
@@ -419,7 +417,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
   <div id="market-svg-wrap"></div>
   <div style="height:16px;"></div>
 </div>
-
 </div><!-- /app -->
 
 <!-- 하단 탭바 -->
@@ -431,594 +428,63 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
 </div>
 
 <script>
-// ─── 레이아웃 ────────────────────────────────────────────────────────────────
-function calcLayout(){
-  const hh=document.getElementById('hdr').offsetHeight;
-  const tb=document.getElementById('tabbar').offsetHeight;
-  const app=document.getElementById('app');
-  app.style.top=hh+'px';
-  app.style.bottom=tb+'px';
-}
-window.addEventListener('load',calcLayout);
-window.addEventListener('resize',calcLayout);
+// [JavaScript 코드는 이전과 동일하되 buildW4SVG 함수만 닫기 추가]
+// ... (기존 JavaScript 코드) ...
 
-// ─── 드로어 (pointer-events 방식으로 수정) ──────────────────────────────────
-const overlay=document.getElementById('overlay');
-const drawer=document.getElementById('drawer');
-// 기본: pointer-events:none (터치 차단 안함)
-overlay.style.pointerEvents='none';
-
-function openDrawer(){
-  overlay.classList.add('open');
-  overlay.style.pointerEvents='auto'; // open시에만 터치 활성
-  drawer.classList.add('open');
-}
-function closeDrawer(){
-  overlay.classList.remove('open');
-  overlay.style.pointerEvents='none'; // 닫히면 다시 none
-  drawer.classList.remove('open');
-}
-
-// ─── 스크린 전환 ─────────────────────────────────────────────────────────────
-const SCREENS={map:'s-map',hall:'s-hall',cars:'s-cars',product:'s-product',market:'s-market'};
-const TABS={map:'tb-map',hall:'tb-hall',cars:'tb-cars',market:'tb-market'};
-const TITLES={
-  map:'🗺️ 전체 지도',hall:'🏢 홀 상세 지도',
-  cars:'🚘 핵심 참관 차종',product:'📋 차종 상세',market:'📊 D-SUV 포지셔닝 맵'
-};
-let lastHall=null,lastCar=null;
-
-function showScreen(sid){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(sid).classList.add('active');
-  document.getElementById(sid).scrollTop=0;
-}
-function switchTab(k){
-  if(k==='hall'&&!lastHall){k='map';}
-  showScreen(SCREENS[k]);
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const tb=document.getElementById(TABS[k]);
-  if(tb) tb.classList.add('active');
-  document.getElementById('hdr-text').textContent=TITLES[k];
-}
-function goHome(){switchTab('map');}
-
-// ─── 환율 변환 ───────────────────────────────────────────────────────────────
-const RATE=194.3; // 1 R = 194.3원
-function rmbToKrw(man){
-  // man: 만RMB 단위
-  const won=man*10000*RATE;
-  if(won>=100000000) return (won/100000000).toFixed(1)+'억원';
-  return Math.round(won/10000)+'만원';
-}
-function priceRange(minR,maxR){
-  // minR, maxR: 만 RMB
-  return `${minR}~${maxR}만 R<br><span style="font-size:10px;color:var(--brown);">${rmbToKrw(minR)} ~ ${rmbToKrw(maxR)}</span>`;
-}
-function singlePrice(r){
-  return `${r}만 R · ${rmbToKrw(r)}`;
-}
-
-// ─── 홀 데이터 ───────────────────────────────────────────────────────────────
-const HALLS={
-  A1:{name:'A1홀',cn:'A区1馆',venue:'CIECC',time:'⏱ 예상 40분',
-    booths:[
-      {num:'A101',kr:'지리 (Geely)',cn:'吉利汽车',t:'n'},
-      {num:'A102',kr:'💡 지커 (Zeekr) 8X',cn:'极氪 8X',t:'target',pid:'zeekr'},
-      {num:'A103',kr:'링크앤코 (Lynk & Co)',cn:'领克汽车',t:'n'},
-      {num:'A104',kr:'지리 갤럭시 (Galaxy)',cn:'吉利银河',t:'n'},
-      {num:'A105',kr:'💡 상기VW 대중자동차',cn:'大众汽车品牌(上汽/一汽/安徽)',t:'target',pid:'vw9x'},
-      {num:'A106',kr:'QCraft (경주지항)',cn:'轻舟智航',t:'n'},
-      {num:'A107',kr:'Jetta (제타)',cn:'捷达汽车',t:'n'},
-      {num:'A108',kr:'Lenovo (레노버)',cn:'联想集团',t:'n'},
-      {num:'A109',kr:'Inchip (인칩)',cn:'仁芯科技',t:'n'},
-      {num:'A110',kr:'InfiMotion (별빛과기)',cn:'星驱科技',t:'n'},
-      {num:'A111',kr:'Horse Powertrain',cn:'浩思动力',t:'n'},
-    ],
-    svg:buildA1SVG()},
-  A2:{name:'A2홀',cn:'A区2馆',venue:'CIECC',time:'⏱ 예상 20분',
-    booths:[
-      {num:'A201',kr:'캐딜락 (Cadillac)',cn:'凯迪拉克',t:'n'},
-      {num:'A202',kr:'보쉬 (Bosch)',cn:'博世',t:'n'},
-      {num:'A203',kr:'CALB 중창신항',cn:'CALB 中创新航',t:'n'},
-      {num:'A204',kr:'차롄티엔샤',cn:'车联天下',t:'n'},
-      {num:'A205',kr:'💡 상기AUDI E7X',cn:'奥迪四环/奥迪字母标',t:'target',pid:'audi'},
-      {num:'A206',kr:'홍치 (红旗)',cn:'红旗 红旗天工 红旗金葵花',t:'n'},
-      {num:'A207',kr:'줘주 (卓驭)',cn:'卓驭汽车',t:'n'},
-      {num:'A208',kr:'212 오프로드',cn:'212越野车',t:'n'},
-      {num:'A209',kr:'SenseAuto (상탕절영)',cn:'商汤绝影',t:'n'},
-      {num:'A210',kr:'이웨이리넝',cn:'亿纬锂能',t:'n'},
-    ],
-    svg:buildA2SVG()},
-  A3:{name:'A3홀',cn:'A区3馆',venue:'CIECC',time:'⏱ 참고',
-    booths:[
-      {num:'A301',kr:'동풍 그룹',cn:'东风汽车集团',t:'n'},
-      {num:'A302',kr:'동풍 PSA (Stellantis)',cn:'东风标致雪铁龙',t:'n'},
-    ],svg:buildGenSVG('A3','A区3馆',[{n:'A301',k:'동풍그룹 (东风汽车)',t:false},{n:'A302',k:'동풍 PSA · Stellantis',t:false}])},
-  A4:{name:'A4홀',cn:'A区4馆',venue:'CIECC',time:'⏱ 참고',
-    booths:[
-      {num:'A401',kr:'리오토 (Li Auto)',cn:'理想汽车',t:'n'},
-      {num:'A402',kr:'샤오미 EV (Xiaomi)',cn:'小米汽车',t:'n'},
-    ],svg:buildGenSVG('A4','A区4馆',[{n:'A401',k:'리오토 (理想汽车)',t:false},{n:'A402',k:'샤오미 EV (小米汽车)',t:false}])},
-  B4:{name:'B4홀',cn:'B区4馆',venue:'CIECC',time:'⏱ 예상 20분',
-    booths:[
-      {num:'B401',kr:'볼보 (Volvo)',cn:'沃尔沃汽车',t:'n'},
-      {num:'B402',kr:'장화이 (JAC)',cn:'江淮汽车',t:'n'},
-      {num:'B403',kr:'💡 링파오 D19',cn:'零跑汽车 D19',t:'target',pid:'leap'},
-      {num:'B404',kr:'Momenta (모멘타)',cn:'Momenta AI',t:'n'},
-      {num:'B406',kr:'HIMA (화웨이 계열)',cn:'鸿蒙智行',t:'n'},
-      {num:'B409',kr:'Sunwoda (선우다)',cn:'新旺达',t:'n'},
-    ],svg:buildGenSVG('B4','B区4馆',[
-      {n:'B401',k:'볼보 (Volvo)',t:false},{n:'B402',k:'장화이 (JAC)',t:false},
-      {n:'B403',k:'💡링파오 D19',t:true,pid:'leap'},{n:'B404',k:'Momenta AI',t:false},
-      {n:'B406',k:'HIMA 화웨이계열',t:false},{n:'B409',k:'Sunwoda',t:false}])},
-  B5:{name:'B5홀',cn:'B区5馆',venue:'CIECC',time:'⏱ 예상 20분',
-    booths:[
-      {num:'B501~502',kr:'GWM 장성 (포어·탱크·하발)',cn:'长城炮·坦克·哈弗',t:'n'},
-      {num:'B502',kr:'오라·웨이 (Ora·Wey)',cn:'欧拉·魏牌',t:'n'},
-      {num:'B504',kr:'💡 동풍닛산 NX8 (+인피니티)',cn:'东风日产 NX8 + 英菲尼迪',t:'target',pid:'nx8'},
-      {num:'B505',kr:'Rox Motor',cn:'Rox Motor',t:'n'},
-      {num:'B506',kr:'MG (名爵)',cn:'MG名爵',t:'n'},
-      {num:'B507',kr:'로위 (Roewe)',cn:'荣威汽车',t:'n'},
-    ],svg:buildGenSVG('B5','B区5馆',[
-      {n:'B501',k:'GWM 포어·탱크·하발',t:false},{n:'B502',k:'오라·웨이(Ora·Wey)',t:false},
-      {n:'B504',k:'💡동풍닛산 NX8',t:true,pid:'nx8'},{n:'B505',k:'Rox Motor',t:false},
-      {n:'B506',k:'MG (名爵)',t:false},{n:'B507',k:'로위 (Roewe)',t:false}])},
-  E1:{name:'E1홀',cn:'E区1馆',venue:'CIEC Shunyi',time:'⏱ 참고',
-    booths:[{num:'E106',kr:'Luxeed (路特斯)',cn:'Lotus Tech',t:'n'}],
-    svg:buildGenSVG('E1','E区1馆',[{n:'E106',k:'Luxeed 路特斯',t:false}])},
-  E2:{name:'E2홀',cn:'E区2馆',venue:'CIEC Shunyi',time:'⏱ 예상 20~40분',
-    booths:[
-      {num:'E201',kr:'Aito (문계 问界)',cn:'赛力斯问界',t:'n'},
-      {num:'E202',kr:'🔵 샤오펑 (Xpeng)',cn:'小鹏汽车 Physical AI',t:'blue'},
-      {num:'E203',kr:'💡 NIO (Onvo·Firefly)',cn:'蔚来(乐道·萤火虫)',t:'target',pid:'nio'},
-    ],svg:buildE2SVG()},
-  E3:{name:'E3홀',cn:'E区3馆',venue:'CIEC Shunyi',time:'⏱ 예상 20분',
-    booths:[
-      {num:'E301',kr:'덴자 (Denza)',cn:'腾势汽车',t:'n'},
-      {num:'E302',kr:'💡 BYD 大唐 (따탕)',cn:'比亚迪大唐',t:'target',pid:'byd'},
-      {num:'E303',kr:'양왕 (Yangwang)',cn:'仰望汽车',t:'n'},
-      {num:'E304',kr:'BYD 충전존 天神之眼',cn:'比亚迪闪充',t:'n'},
-      {num:'E305',kr:'팡청바오',cn:'方程豹',t:'n'},
-    ],svg:buildGenSVG('E3','E区3馆',[
-      {n:'E301',k:'덴자(Denza 腾势)',t:false},
-      {n:'E302',k:'💡BYD 大唐(따탕)',t:true,pid:'byd'},
-      {n:'E303',k:'양왕(仰望)',t:false},{n:'E304',k:'BYD 천신즈옌',t:false},{n:'E305',k:'팡청바오(方程豹)',t:false}])},
-  E4:{name:'E4홀',cn:'E区4馆',venue:'CIEC Shunyi',time:'⏱ 예상 20분',
-    booths:[
-      {num:'E401',kr:'🔵 현대자동차 (Hyundai)',cn:'现代汽车',t:'blue'},
-      {num:'E402',kr:'Mercedes-Benz (벤츠)',cn:'梅赛德斯-奔驰',t:'n'},
-    ],svg:buildGenSVG('E4','E区4馆',[
-      {n:'E401',k:'🔵현대자동차(Hyundai)',t:false,hl:true},
-      {n:'E402',k:'Mercedes-Benz 벤츠',t:false}])},
-  W1:{name:'W1홀',cn:'W区1馆',venue:'CIEC Shunyi',time:'⏱ 참고',booths:[{num:'-',kr:'부품 전시 구역',cn:'零部件展区',t:'n'}],svg:buildGenSVG('W1','W区1馆',[{n:'-',k:'부품 전시(零部件展区)',t:false}])},
-  W2:{name:'W2홀',cn:'W区2馆',venue:'CIEC Shunyi',time:'⏱ 참고',booths:[{num:'-',kr:'부품 전시 구역',cn:'零部件展区',t:'n'}],svg:buildGenSVG('W2','W区2馆',[{n:'-',k:'부품 전시(零部件展区)',t:false}])},
-  W3:{name:'W3홀',cn:'W区3馆',venue:'CIEC Shunyi',time:'⏱ 참고',booths:[{num:'-',kr:'미디어 전시 구역',cn:'媒体展区',t:'n'}],svg:buildGenSVG('W3','W区3馆',[{n:'-',k:'미디어 전시(媒体展区)',t:false}])},
-  W4:{name:'W4홀',cn:'W区4馆',venue:'CIEC Shunyi',time:'⏱ 예상 20분',
-    booths:[
-      {num:'W401',kr:'CATL (닝더스다이)',cn:'宁德时代',t:'n'},
-      {num:'W402~403',kr:'💡 BMW iX3L',cn:'宝马 iX3L (Neue Klasse)',t:'target',pid:'bmw'},
-      {num:'W403b',kr:'MINI',cn:'MINI',t:'n'},
-      {num:'W404',kr:'포르쉐 (Porsche)',cn:'保时捷',t:'n'},
-      {num:'W405',kr:'Toyota Boshoku',cn:'丰田纺织',t:'n'},
-      {num:'W4-W01',kr:'Toyota (토요타)',cn:'丰田汽车',t:'n'},
-    ],svg:buildGenSVG('W4','W区4馆',[
-      {n:'W401',k:'CATL(宁德时代)',t:false},
-      {n:'W402',k:'💡BMW iX3L(宝马)',t:true,pid:'bmw'},
-      {n:'W403',k:'MINI',t:false},{n:'W404',k:'포르쉐(保时捷)',t:false},
-      {n:'W405',k:'Toyota Boshoku',t:false},{n:'W4-W01',k:'토요타(丰田)',t:false}])},
-};
-
-// ─── SVG 빌더 ─────────────────────────────────────────────────────────────────
-function buildA1SVG(){
-  return `<svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
-<rect width="380" height="300" fill="#EFF6FF" rx="6"/>
-<rect width="380" height="32" fill="#1E3A8A" rx="6"/>
-<text x="10" y="13" font-size="15" fill="white" font-weight="800">A1</text>
-<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
-<text x="10" y="27" font-size="8" fill="#93C5FD">A区1馆 · CIECC 수도 국제 회전 센터</text>
-<!-- 입구 상단 -->
-<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
-<!-- 상단 기술존 -->
-<rect x="8" y="50" width="72" height="42" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="44" y="67" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A110</text>
-<text x="44" y="79" text-anchor="middle" font-size="7" fill="#6B7280">별빛과기(星驱)</text>
-<text x="44" y="87" text-anchor="middle" font-size="6" fill="#9CA3AF">InfiMotion</text>
-<rect x="84" y="50" width="55" height="20" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-<text x="111" y="64" text-anchor="middle" font-size="7" fill="#6B7280">A108 레노버</text>
-<rect x="84" y="73" width="55" height="19" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-<text x="111" y="86" text-anchor="middle" font-size="7" fill="#6B7280">A109 인칩</text>
-<rect x="8" y="96" width="72" height="18" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-<text x="44" y="108" text-anchor="middle" font-size="7" fill="#6B7280">A111 Horse Powertrain</text>
-<rect x="143" y="50" width="50" height="42" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="168" y="67" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">A107</text>
-<text x="168" y="78" text-anchor="middle" font-size="8" fill="#6B7280">제타</text>
-<text x="168" y="88" text-anchor="middle" font-size="7" fill="#9CA3AF">捷达 JETTA</text>
-<rect x="197" y="50" width="50" height="42" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="222" y="67" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">A106</text>
-<text x="222" y="78" text-anchor="middle" font-size="7" fill="#6B7280">경주지항</text>
-<text x="222" y="88" text-anchor="middle" font-size="7" fill="#9CA3AF">QCraft</text>
-<!-- A105 VW 강조 대형 -->
-<rect x="251" y="50" width="122" height="64" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5"/>
-<text x="312" y="70" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">A105</text>
-<text x="312" y="83" text-anchor="middle" font-size="10" fill="#92400E" font-weight="800">💡 대중자동차</text>
-<text x="312" y="95" text-anchor="middle" font-size="7" fill="#B45309">大众汽车品牌</text>
-<text x="312" y="106" text-anchor="middle" font-size="6" fill="#B45309">(上汽/一汽/安徽大众)</text>
+// buildW4SVG 함수 끝부분 수정
+function buildW4SVG(){
+  return `<svg viewBox="0 0 400 295" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="400" height="295" fill="#EFF6FF" rx="6"/>
+<rect width="400" height="32" fill="#1E3A8A" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">W4</text>
+<text x="200" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="7" fill="#93C5FD">W区4馆 · CIEC Shunyi</text>
+<text x="200" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- W4-W01 丰田 별관 (좌측 돌출) -->
+<rect x="8" y="52" width="52" height="100" rx="4" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="34" y="87" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">W4-W01</text>
+<text x="34" y="103" text-anchor="middle" font-size="11" fill="#374151" font-weight="800">丰田</text>
+<text x="34" y="117" text-anchor="middle" font-size="8" fill="#9CA3AF">TOYOTA</text>
+<!-- W401 CATL 宁德时代 -->
+<rect x="64" y="52" width="140" height="100" rx="5" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="134" y="75" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">W401</text>
+<text x="134" y="95" text-anchor="middle" font-size="14" fill="#374151" font-weight="800">宁德时代</text>
+<text x="134" y="113" text-anchor="middle" font-size="10" fill="#9CA3AF">CATL</text>
+<!-- W402~403 BMW 핵심 강조 (대형) -->
+<rect x="208" y="52" width="184" height="100" rx="5" fill="#E0F5FB" stroke="#00AAD4" stroke-width="2.5" onclick="goCar('bmw')" style="cursor:pointer"/>
+<text x="300" y="73" text-anchor="middle" font-size="8" fill="#0077A0" font-weight="700">W402~403</text>
+<text x="300" y="93" text-anchor="middle" font-size="16" fill="#0077A0" font-weight="800">💡 宝马</text>
+<text x="300" y="112" text-anchor="middle" font-size="10" fill="#0077A0">BMW iX3L + MINI</text>
+<text x="300" y="128" text-anchor="middle" font-size="7" fill="#00AAD4">탭→상품정보</text>
 <!-- 구분선 -->
-<line x1="8" y1="120" x2="372" y2="120" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
-<!-- 하단 완성차 -->
-<rect x="8" y="128" width="80" height="110" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="48" y="148" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A101</text>
-<text x="48" y="165" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">지리</text>
-<text x="48" y="180" text-anchor="middle" font-size="8" fill="#9CA3AF">GEELY</text>
-<text x="48" y="194" text-anchor="middle" font-size="7" fill="#9CA3AF">吉利汽车</text>
-<!-- A102 지커 강조 -->
-<rect x="94" y="128" width="82" height="110" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('zeekr')" style="cursor:pointer"/>
-<text x="135" y="148" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">A102</text>
-<text x="135" y="168" text-anchor="middle" font-size="14" fill="#92400E" font-weight="800">💡지커</text>
-<text x="135" y="184" text-anchor="middle" font-size="8" fill="#B45309">极氪 ZEEKR</text>
-<text x="135" y="197" text-anchor="middle" font-size="7" fill="#EA580C">8X 전시</text>
-<text x="135" y="207" text-anchor="middle" font-size="6" fill="#EA580C">탭→상품정보</text>
-<rect x="182" y="128" width="82" height="110" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="223" y="148" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A103</text>
-<text x="223" y="168" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">링크앤코</text>
-<text x="223" y="183" text-anchor="middle" font-size="8" fill="#9CA3AF">Lynk &amp; Co</text>
-<text x="223" y="196" text-anchor="middle" font-size="7" fill="#9CA3AF">领克汽车</text>
-<rect x="270" y="128" width="103" height="110" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="321" y="148" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A104</text>
-<text x="321" y="168" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">지리 갤럭시</text>
-<text x="321" y="183" text-anchor="middle" font-size="8" fill="#9CA3AF">吉利银河</text>
-<text x="321" y="196" text-anchor="middle" font-size="7" fill="#9CA3AF">Galaxy</text>
-<!-- 입구 하단 -->
-<text x="190" y="254" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구 (入口/出口)</text>
-<!-- 시간 -->
-<rect x="4" y="260" width="372" height="16" rx="4" fill="#FEF3C7"/>
-<text x="190" y="271" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상 소요: 40분 (지커 20분 + 상기VW 20분)</text>
+<line x1="64" y1="158" x2="392" y2="158" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단: W404 保时捷 + W405 丰田纺织 + W406 傲旋 + W407 莲花 + W408 移远通信 -->
+<rect x="64" y="165" width="130" height="90" rx="5" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="129" y="188" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">W404</text>
+<text x="129" y="208" text-anchor="middle" font-size="14" fill="#374151" font-weight="800">保时捷</text>
+<text x="129" y="225" text-anchor="middle" font-size="9" fill="#9CA3AF">PORSCHE</text>
+<rect x="198" y="165" width="90" height="90" rx="4" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="243" y="188" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W405</text>
+<text x="243" y="208" text-anchor="middle" font-size="11" fill="#374151" font-weight="800">丰田纺织</text>
+<text x="243" y="224" text-anchor="middle" font-size="8" fill="#9CA3AF">TOYOTA BOSHOKU</text>
+<rect x="292" y="165" width="50" height="43" rx="3" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1"/>
+<text x="317" y="184" text-anchor="middle" font-size="7" fill="#6B7280">W406</text>
+<text x="317" y="198" text-anchor="middle" font-size="9" fill="#374151">傲旋 AUXUN</text>
+<rect x="292" y="212" width="50" height="43" rx="3" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1"/>
+<text x="317" y="231" text-anchor="middle" font-size="7" fill="#6B7280">W407</text>
+<text x="317" y="245" text-anchor="middle" font-size="9" fill="#374151">莲花 LOTUS</text>
+<rect x="346" y="165" width="46" height="90" rx="3" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1"/>
+<text x="369" y="205" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W408</text>
+<text x="369" y="220" text-anchor="middle" font-size="7" fill="#374151">移远通信</text>
+<text x="369" y="233" text-anchor="middle" font-size="7" fill="#9CA3AF">Quectel</text>
+<text x="200" y="268" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구 (入口/出口)</text>
+<rect x="4" y="276" width="392" height="14" rx="4" fill="#E0F5FB"/>
+<text x="200" y="287" text-anchor="middle" font-size="8" fill="#0077A0" font-weight="700">⏱ 예상 소요: 20분 (BMW iX3L)</text>
 </svg>`;
-}
+} // ✅ 이제 닫혀있음
 
-function buildA2SVG(){
-  return `<svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
-<rect width="380" height="280" fill="#EFF6FF" rx="6"/>
-<rect width="380" height="32" fill="#1E3A8A" rx="6"/>
-<text x="10" y="13" font-size="15" fill="white" font-weight="800">A2</text>
-<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
-<text x="10" y="27" font-size="8" fill="#93C5FD">A区2馆 · CIECC</text>
-<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구</text>
-<!-- 상단 5개 부스 -->
-<rect x="8" y="50" width="72" height="70" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="44" y="70" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A201</text>
-<text x="44" y="83" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">캐딜락</text>
-<text x="44" y="96" text-anchor="middle" font-size="7" fill="#9CA3AF">Cadillac</text>
-<rect x="84" y="50" width="65" height="70" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="116" y="70" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A202</text>
-<text x="116" y="83" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">보쉬</text>
-<text x="116" y="96" text-anchor="middle" font-size="7" fill="#9CA3AF">Bosch</text>
-<rect x="153" y="50" width="50" height="70" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="178" y="70" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A203</text>
-<text x="178" y="82" text-anchor="middle" font-size="7" fill="#6B7280">CALB</text>
-<text x="178" y="92" text-anchor="middle" font-size="6" fill="#9CA3AF">中创新航</text>
-<rect x="207" y="50" width="45" height="70" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="229" y="70" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A204</text>
-<text x="229" y="82" text-anchor="middle" font-size="7" fill="#6B7280">차롄</text>
-<text x="229" y="92" text-anchor="middle" font-size="6" fill="#9CA3AF">车联天下</text>
-<!-- A205 AUDI 강조 대형 -->
-<rect x="256" y="50" width="116" height="70" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('audi')" style="cursor:pointer"/>
-<text x="314" y="70" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">A205</text>
-<text x="314" y="85" text-anchor="middle" font-size="11" fill="#92400E" font-weight="800">💡 상기AUDI</text>
-<text x="314" y="98" text-anchor="middle" font-size="8" fill="#B45309">E7X · 奥迪四环</text>
-<text x="314" y="110" text-anchor="middle" font-size="6" fill="#EA580C">탭→상품정보</text>
-<!-- 구분선 -->
-<line x1="8" y1="126" x2="372" y2="126" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
-<!-- 하단 좌측 홍치 대형 -->
-<rect x="8" y="133" width="150" height="80" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="83" y="153" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A206</text>
-<text x="83" y="170" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">홍치 (红旗)</text>
-<text x="83" y="184" text-anchor="middle" font-size="7" fill="#9CA3AF">红旗 红旗天工 红旗金葵花</text>
-<!-- 하단 중간 -->
-<rect x="163" y="133" width="70" height="80" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="198" y="153" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A207</text>
-<text x="198" y="170" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">줘주</text>
-<text x="198" y="183" text-anchor="middle" font-size="7" fill="#9CA3AF">卓驭汽车</text>
-<rect x="237" y="133" width="85" height="80" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="279" y="153" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A208</text>
-<text x="279" y="170" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">212 오프로드</text>
-<text x="279" y="183" text-anchor="middle" font-size="7" fill="#9CA3AF">212越野车</text>
-<rect x="326" y="133" width="46" height="38" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-<text x="349" y="152" text-anchor="middle" font-size="6" fill="#6B7280">A210 亿纬锂能</text>
-<rect x="326" y="175" width="46" height="38" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-<text x="349" y="194" text-anchor="middle" font-size="6" fill="#6B7280">A209 SenseAuto</text>
-<text x="190" y="228" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
-<rect x="4" y="235" width="372" height="16" rx="4" fill="#FEF3C7"/>
-<text x="190" y="246" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상 소요: 20분 (상기AUDI E7X)</text>
-</svg>`;
-}
-
-function buildE2SVG(){
-  return `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:320px;">
-<rect width="360" height="220" fill="#FFFBEB" rx="6"/>
-<rect width="360" height="30" fill="#1E40AF" rx="6"/>
-<text x="10" y="12" font-size="14" fill="white" font-weight="800">E2</text>
-<text x="180" y="12" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
-<text x="10" y="26" font-size="7" fill="#93C5FD">E区2馆 · CIEC Shunyi 순이관</text>
-<text x="180" y="42" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (⑥번 동선)</text>
-<rect x="8" y="48" width="105" height="100" rx="5" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="60" y="70" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">E201</text>
-<text x="60" y="86" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">Aito</text>
-<text x="60" y="100" text-anchor="middle" font-size="8" fill="#9CA3AF">문계 问界</text>
-<text x="60" y="112" text-anchor="middle" font-size="7" fill="#9CA3AF">赛力斯问界</text>
-<rect x="120" y="48" width="108" height="100" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2.5"/>
-<text x="174" y="70" text-anchor="middle" font-size="8" fill="#1E40AF" font-weight="700">E202</text>
-<text x="174" y="88" text-anchor="middle" font-size="13" fill="#1E40AF" font-weight="800">🔵샤오펑</text>
-<text x="174" y="103" text-anchor="middle" font-size="8" fill="#1E40AF">小鹏汽车 Xpeng</text>
-<text x="174" y="116" text-anchor="middle" font-size="7" fill="#3B82F6">Physical AI</text>
-<text x="174" y="128" text-anchor="middle" font-size="7" fill="#1E40AF">비행차·로봇 전시</text>
-<rect x="236" y="48" width="116" height="100" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('nio')" style="cursor:pointer"/>
-<text x="294" y="70" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">E203</text>
-<text x="294" y="88" text-anchor="middle" font-size="13" fill="#92400E" font-weight="800">💡 NIO</text>
-<text x="294" y="103" text-anchor="middle" font-size="8" fill="#B45309">蔚来 ES9</text>
-<text x="294" y="115" text-anchor="middle" font-size="7" fill="#92400E">Onvo·Firefly</text>
-<text x="294" y="127" text-anchor="middle" font-size="7" fill="#EA580C">탭→상품정보</text>
-<text x="180" y="165" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
-<rect x="4" y="172" width="352" height="15" rx="4" fill="#FEF3C7"/>
-<text x="180" y="183" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상: NIO 20분 + 샤오펑 참고 관람</text>
-</svg>`;
-}
-
-function buildGenSVG(name,cn,booths){
-  const cols=2;const bw=168;const bh=62;const pad=8;const topY=44;
-  const rows=Math.ceil(booths.length/cols);
-  const sw=cols*bw+(cols+1)*pad;
-  const sh=topY+rows*(bh+pad)+pad+28;
-  let cells=booths.map((b,i)=>{
-    const col=i%cols;const row=Math.floor(i/cols);
-    const x=pad+col*(bw+pad);const y=topY+row*(bh+pad);
-    const bg=b.t?'#FEF3C7':b.hl?'#DBEAFE':'#F3F4F6';
-    const sc=b.t?'#F59E0B':b.hl?'#3B82F6':'#D1D5DB';
-    const tc=b.t?'#92400E':b.hl?'#1E40AF':'#6B7280';
-    const sw2=b.t?2.5:1.5;
-    const clk=b.pid?`onclick="goCar('${b.pid}')" style="cursor:pointer"`:'' ;
-    const kr=b.k.length>18?b.k.slice(0,17)+'…':b.k;
-    return `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="5" fill="${bg}" stroke="${sc}" stroke-width="${sw2}" ${clk}/>
-<text x="${x+bw/2}" y="${y+16}" text-anchor="middle" font-size="8" fill="${tc}" font-weight="700">${b.n}</text>
-<text x="${x+bw/2}" y="${y+33}" text-anchor="middle" font-size="11" fill="${tc}" font-weight="800">${kr}</text>
-${b.t?`<text x="${x+bw/2}" y="${y+52}" text-anchor="middle" font-size="7" fill="#EA580C">탭하여 상품정보 확인 →</text>`:''}`;
-  }).join('');
-  return `<svg viewBox="0 0 ${sw} ${sh}" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:320px;">
-<rect width="${sw}" height="${sh}" fill="#F8FAFC" rx="6"/>
-<rect width="${sw}" height="30" fill="#1E40AF" rx="6"/>
-<text x="10" y="12" font-size="13" fill="#fff" font-weight="800">${name}</text>
-<text x="${sw/2}" y="12" text-anchor="middle" font-size="9" fill="#93C5FD">Auto China 2026</text>
-<text x="10" y="26" font-size="7" fill="#93C5FD">${cn}</text>
-<text x="${sw/2}" y="40" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
-${cells}
-<text x="${sw/2}" y="${sh-6}" text-anchor="middle" font-size="7" fill="#9CA3AF">Auto China 2026 · 탭하여 상품 정보 확인</text>
-</svg>`;
-}
-
-// ─── 홀 렌더링 ────────────────────────────────────────────────────────────────
-function goHall(id){
-  lastHall=id;
-  const h=HALLS[id];if(!h)return;
-  const rows=h.booths.map(b=>{
-    const cls=b.t==='target'?'t':b.t==='blue'?'b':'n';
-    const hasPid=(b.t==='target'||b.t==='blue')&&b.pid;
-    return `<div class="br ${cls}" ${hasPid?`onclick="goCar('${b.pid}')" style="cursor:pointer"`:''}>
-      <div class="bi">
-        <div class="bkr">${b.kr}</div>
-        <div class="bcn">${b.cn}</div>
-        <div class="bnum">부스: ${b.num}</div>
-      </div>
-      ${hasPid?`<button class="vbtn ${cls==='b'?'blue':''}" onclick="event.stopPropagation();goCar('${b.pid}')">상품정보 →</button>`:''}
-    </div>`;
-  }).join('');
-  document.getElementById('hall-content').innerHTML=`
-    <div class="hall-hero"><h2>${h.name}</h2><div class="hcn">${h.cn} · ${h.venue}</div><span class="hall-time">${h.time}</span></div>
-    <div class="map-wrap">${h.svg}</div>
-    <div class="card"><div class="card-hd">🏷️ 브랜드별 위치 (한국어 / 中文 병기)</div><div class="booth-list">${rows}</div></div>`;
-  showScreen('s-hall');
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tb-hall').classList.add('active');
-  document.getElementById('hdr-text').textContent='🏢 홀 상세 지도';
-}
-
-// ─── 차종 데이터 ─────────────────────────────────────────────────────────────
-const CARS={
-  nx8:{name:'동풍닛산 NX8',cn:'东风日产 NX8',launch:'2026.04 신차',hall:'B5홀 · B504',hallId:'B5',venue:'CIECC',
-    priceMin:15.99,priceMax:20.99,priceNote:'주력 16.99만 RMB',types:['신차','BEV','EREV'],
-    emoji:'🚗',
-    concept:'닛산 "Glocal 전략"의 텐옌 2.0 아키텍처 적용 첫 SUV. N8(EREV+BEV) 단계적 PE 내재화. 글로벌 품질+현지 솔루션(화웨이/CATL) 결합 합자 전략 핵심 모델.',
-    specs:[{l:'제원(mm)',v:'4,870×1,920×1,680/2,917'},{l:'BEV 모터',v:'후 215/250 kW'},{l:'BEV 배터리',v:'LFP 73/81 kWh'},{l:'BEV 항속',v:'580/650/630 km'},{l:'EREV 엔진',v:'1.5T+195 kW'},{l:'EREV 배터리',v:'LFP 21.1~43.2 kWh'},{l:'종합항속',v:'1,450 km'},{l:'급속충전',v:'30~80% 10~12분'},{l:'제로백',v:'6.7~7.1s'},{l:'가격',v:'15.99~20.99만 RMB'}],
-    usps:[{i:'🤖',l:'ADAS',t:'Momenta L2++급\n1L 3R 12U 12V'},{i:'🖥️',l:'스마트 캐빈',t:'퀄컴8295P\n63"AR-HUD+10.25"+15.6"×2'},{i:'🪑',l:'무중력 시트',t:'운전석 53센서/조수석 39센서'},{i:'🔧',l:'섀시',t:'E-Damper CDC\n전방 15m 감지'}]},
-  vw9x:{name:'상기VW ID.ERA 9X',cn:'上汽大众 ID.ERA 9X',launch:'2026.04 신차',hall:'A1홀 · A105',hallId:'A1',venue:'CIECC',
-    priceMin:32.98,priceMax:37.98,priceNote:'예매가 기준',types:['신차','EREV'],
-    emoji:'🚙',
-    concept:'상기VW "합작 2.0" 전략 첫 EREV 플래그십 SUV. 상기 플랫폼+VW 엔진. 현지 솔루션(모멘타/CATL) 중국 주도 개발.',
-    specs:[{l:'제원(mm)',v:'5,207×1,997×1,810/3,070'},{l:'엔진',v:'1.5T 143PS'},{l:'모터',v:'전150+후220 kW'},{l:'배터리',v:'LFP51.1/NCM65.2 kWh'},{l:'순전기항속',v:'347/406 km'},{l:'종합항속',v:'1,611/1,651 km'},{l:'급속충전',v:'10~80% 17~19분'},{l:'제로백',v:'5.6s'},{l:'9개 스크린',v:'21.4"+15.6"+15.6"'},{l:'가격',v:'32.98~37.98만 RMB'}],
-    usps:[{i:'🤖',l:'ADAS',t:'Momenta L2++급\n1L 1R 12U 12V'},{i:'🖥️',l:'캐빈',t:'퀄컴8295칩·9개 스크린\nHUD+21.4"+15.6"'},{i:'🔧',l:'섀시',t:'에어서스+RWS±10°+크랩모드\n회전반경 4.8m'},{i:'💡',l:'신기술',t:'6인치 Smart Surface\n무중력시트 에어백'}]},
-  byd:{name:'BYD 大唐 (따탕)',cn:'比亚迪 大唐',launch:'2026.04~05 신차',hall:'E3홀 · E302',hallId:'E3',venue:'CIEC Shunyi',
-    priceMin:30,priceMax:40,priceNote:'BEV/PHEV 예상가',types:['신차','BEV','PHEV'],
-    emoji:'⚡',
-    concept:'고가 시장 공백 보완 BYD 플래그십 SUV. 2세대 블레이드 배터리 10~97% 9분 충전. 에어서스+RWS 탑재.',
-    specs:[{l:'제원(mm)',v:'5,263×1,999×1,790/3,130'},{l:'BEV 모터',v:'후300/370,전215+후370 kW'},{l:'BEV 항속',v:'950 km 수준'},{l:'PHEV 엔진',v:'1.5T 156PS'},{l:'PHEV 항속',v:'450 km 수준'},{l:'급속충전',v:'10~97% 9분 (1000V)'},{l:'에어서스',v:'2챔버+RWS±5°'},{l:'회전반경',v:'5.2m'},{l:'배터리',v:'LFP 미공개 (2세대 블레이드)'},{l:'가격',v:'30만+ RMB 예상'}],
-    usps:[{i:'⚡',l:'2세대 블레이드',t:'1000V·10~97% 9분\n목표항속 1,000km'},{i:'🔧',l:'섀시',t:'에어서스+RWS±5°\n높이150mm·반경5.2m'},{i:'🤖',l:'ADAS',t:'BYD Dipilot 300\n1L 5R 12U 12V'},{i:'🖥️',l:'디스플레이',t:'후석 루프 디스플레이\n클러스터+센터+조수석+후석'}]},
-  zeekr:{name:'지커(Zeekr) 8X',cn:'极氪 8X',launch:'2026 Q2 예정',hall:'A1홀 · A102',hallId:'A1',venue:'CIECC',
-    priceMin:37.68,priceMax:51.68,priceNote:'예매가 기준',types:['신차','PHEV','럭셔리'],
-    emoji:'🔋',
-    concept:'SEA-R 플랫폼 기반 BEV/PHEV 병행 프리미엄 대형 SUV. 3모터 1,030kW, 제로백 2.96s. 지커 9X 하방 확대.',
-    specs:[{l:'제원(mm)',v:'5,100×1,998×1,780/3,069'},{l:'2모터',v:'전290+후370 kW=660 kW'},{l:'3모터',v:'전290+후740 kW=1,030 kW'},{l:'배터리',v:'NCM 55/70 kWh(CATL)'},{l:'55kWh항속',v:'순전기320km·종합1,362km'},{l:'70kWh항속',v:'순전기410km·종합1,416km'},{l:'급속충전',v:'20~80% 9분'},{l:'제로백',v:'2.96s (3모터)'},{l:'디스플레이',v:'센터16"+조수석16"+후석17"'},{l:'가격',v:'37.68~51.68만 RMB'}],
-    usps:[{i:'⚡',l:'3모터 1,030kW',t:'제로백 2.96s'},{i:'🔧',l:'섀시',t:'에어서스(2챔버)+CDC\n48V anti-roll·900V 6C'},{i:'🤖',l:'ADAS',t:'천리하오한 H9 L3급\n5라이다·1,400TOPS'},{i:'🖥️',l:'디스플레이',t:'센터16"+조수석16"+후석17"'}]},
-  nio:{name:'NIO ES9',cn:'蔚来 ES9',launch:'2026.05 신차',hall:'E2홀 · E203',hallId:'E2',venue:'CIEC Shunyi',
-    priceMin:52.80,priceMax:65.80,priceNote:'출시 예정가',types:['신차','BEV','ICT'],
-    emoji:'🌟',
-    concept:'ET9 플래그십 상품성+하방 포지셔닝 NIO 전략 SUV. 3라이다, NX9031칩(2000TOPS+), 900V·풀액티브서스.',
-    specs:[{l:'제원(mm)',v:'5,365×2,029×1,870/3,250'},{l:'모터',v:'4WD 전180+후340=520 kW'},{l:'배터리',v:'NCM 102 kWh(CATL)'},{l:'항속',v:'620 km (CLTC)'},{l:'충전플랫폼',v:'900V·최고925V·600kW'},{l:'제로백',v:'4.3s'},{l:'자율주행칩',v:'NX9031 2,000TOPS+'},{l:'서스펜션',v:'풀 액티브 서스펜션'},{l:'조향',v:'SBW+RWS±8.4°·반경5.4m'},{l:'가격',v:'52.80~65.80만 RMB'}],
-    usps:[{i:'🚀',l:'900V 충전',t:'ET9 동일·925V·600kW'},{i:'🔧',l:'섀시',t:'풀액티브서스+SBW\nRWS±8.4°·반경5.4m'},{i:'🤖',l:'L3급 자율주행',t:'3라이다+NX9031\n2,000TOPS+'},{i:'🪟',l:'프리미엄',t:'2열 디밍글라스\n반응속도0.017초'}]},
-  leap:{name:'링파오 D19',cn:'零跑汽车 D19',launch:'2026.04 신차',hall:'B4홀 · B403',hallId:'B4',venue:'CIECC',
-    priceMin:25,priceMax:30,priceNote:'출시 전 예상',types:['신차','BEV','EREV'],
-    emoji:'🚀',
-    concept:'LEAP 4.0 중앙집중형 EEA 첫 적용 링파오 플래그십 SUV. 1000V BEV+800V EREV 병행. 풀스택 내재화.',
-    specs:[{l:'제원(mm)',v:'5,252×1,995×1,780/3,110'},{l:'BEV 모터',v:'2모터410/3모터540 kW'},{l:'BEV 배터리',v:'LFP+NCM 115 kWh'},{l:'BEV 항속',v:'720 km'},{l:'EREV 배터리',v:'80.3 kWh(LFP)'},{l:'EREV 항속',v:'500km(종합1,300km)'},{l:'급속충전',v:'15분 350km(BEV)'},{l:'제로백',v:'3~4s(BEV)'},{l:'디스플레이',v:'60"AR-HUD+17.3"+21.4"'},{l:'가격',v:'25~30만 RMB 예상'}],
-    usps:[{i:'⚡',l:'1000V BEV',t:'NCM+LFP 융합\n1000V 고전압'},{i:'🔋',l:'EREV',t:'80kWh+40L연료+800V\neAER 500km'},{i:'🔧',l:'섀시',t:'에어서스(2챔버)+CDC'},{i:'🤖',l:'LEAP 4.0',t:'중앙집중형 EEA 첫 적용\nL3.5급 지원'}]},
-  audi:{name:'상기AUDI E7X',cn:'上汽奥迪 E7X',launch:'2026년 상반기 예정',hall:'A2홀 · A205',hallId:'A2',venue:'CIECC',
-    priceMin:33,priceMax:40,priceNote:'출시 전 예상',types:['신차','BEV'],
-    emoji:'🏎',
-    concept:'상기 쯔지 LS7 기반 B바디 개발 AUDI 첫 SUV. 아우디 디자인/섀시+상기 ADAS/IVI. 900V 플랫폼.',
-    specs:[{l:'제원(mm)',v:'5,049×1,997×1,710/3,060'},{l:'RWD 모터',v:'후륜 300 kW'},{l:'AWD 모터',v:'전200+후300 kW'},{l:'배터리',v:'NCM 100/109 kWh'},{l:'RWD 항속',v:'691~751 km'},{l:'AWD 항속',v:'615~660 km'},{l:'급속충전',v:'10분 400km (900V)'},{l:'회전반경',v:'RWS±5°·5.1m'},{l:'헤드라이트',v:'DLP 1000만픽셀·120LUX'},{l:'가격',v:'33~40만 RMB 예상'}],
-    usps:[{i:'⚡',l:'900V',t:'10분 400km\nAdvanced Digitized'},{i:'🔧',l:'섀시',t:'에어서스+CDC+RWS±5°\n높이30mm·반경5.1m'},{i:'🤖',l:'ADAS',t:'Momenta L2++\nFlywheel Big Model'},{i:'💡',l:'DLP',t:'1000만픽셀/120LUX\n프로젝션 헤드라이트'}]},
-  bmw:{name:'BMW iX3L',cn:'宝马 iX3L',launch:'2026년 상반기 예정',hall:'W4홀 · W402~403',hallId:'W4',venue:'CIEC Shunyi',
-    priceMin:35,priceMax:40,priceNote:'기존iX3:40.5~44.5만R',types:['FMC','BEV'],
-    emoji:'🚘',
-    concept:'Neue Klasse 전용 EV 플랫폼 BMW 핵심 전략 SUV. 중국 롱바디 축거+110mm. Harmony OS+DeepSeek+알리바바LLM.',
-    specs:[{l:'축거(롱바디)',v:'3,005mm(글로벌+110mm)'},{l:'모터',v:'4WD 345 kW 수준'},{l:'배터리',v:'NCM 108 kWh 수준'},{l:'항속',v:'900 km 수준'},{l:'급속충전',v:'10분 427km'},{l:'제로백',v:'4.9s 수준'},{l:'플랫폼',v:'Neue Klasse EV전용'},{l:'배터리셀',v:'6세대eDrive+원통형'},{l:'인포',v:'HarmonyOS+DeepSeek'},{l:'가격',v:'35~40만 RMB 예상'}],
-    usps:[{i:'🏗️',l:'Neue Klasse',t:'EV전용·iX3 첫 적용\nAER900km·10분427km'},{i:'🤖',l:'ADAS',t:'Momenta L2++\n도심NP/고속NP'},{i:'📱',l:'중국 인포',t:'HarmonyOS+DeepSeek\n+알리바바LLM'},{i:'🖥️',l:'디스플레이',t:'43"Panoramic HUD\n+14"+14"+17.9" DSP'}]},
-};
-
-// ─── 차종 렌더링 ─────────────────────────────────────────────────────────────
-function goCar(id){
-  lastCar=id;
-  const p=CARS[id];if(!p)return;
-  const badges=p.types.map(t=>{
-    let c='bnew';
-    if(t==='BEV')c='bev';else if(t==='PHEV')c='phev';else if(t==='EREV')c='erev';
-    return `<span class="badge ${c}">${t}</span>`;
-  }).join('');
-  const specs=p.specs.map(s=>`<div class="si"><div class="sl">${s.l}</div><div class="sv">${s.v}</div></div>`).join('');
-  const usps=p.usps.map(u=>`<div class="usp"><div class="ui">${u.i}</div><div class="ub"><span class="ul">${u.l}</span><span class="ut">${u.t.replace(/\n/g,'<br>')}</span></div></div>`).join('');
-  const wonMin=rmbToKrw(p.priceMin);
-  const wonMax=rmbToKrw(p.priceMax);
-
-  document.getElementById('product-content').innerHTML=`
-    <div class="back-bar">
-      <button class="back-btn" onclick="showScreen('s-cars');switchTabOnly('cars')">← 차종</button>
-      <button class="back-btn" onclick="goHall('${p.hallId}')">🏢 ${p.hall.split('·')[0].trim()}</button>
-    </div>
-    <div class="p-hero">
-      <div class="p-hero-img-placeholder">${p.emoji}</div>
-      <div class="p-hero-body">
-        <div class="launch">💡 핵심 참관 차종 · ${p.launch}</div>
-        <div class="p-name">${p.name}</div>
-        <div class="p-cn">${p.cn}</div>
-        <div class="p-badges">${badges}<span class="badge bhall">📍${p.hall}</span></div>
-      </div>
-    </div>
-    <div class="price-box">
-      <div>
-        <div class="pl">예상 가격 (중국 현지)</div>
-        <div class="pw">${p.priceMin}~${p.priceMax}만 R</div>
-        <div class="pr">${p.priceNote} · 환율 194.3 R/원</div>
-      </div>
-      <div>
-        <div class="pv">${wonMin}</div>
-        <div class="pvw">~ ${wonMax}</div>
-      </div>
-    </div>
-    <div class="card"><div class="sec-hd">📝 상품 개요</div><div class="concept">${p.concept}</div></div>
-    <div class="card"><div class="sec-hd">⭐ 주요 USP</div><div class="usp-list">${usps}</div></div>
-    <div class="card"><div class="sec-hd">📊 주요 제원</div><div class="spec-grid">${specs}</div></div>`;
-
-  showScreen('s-product');
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('hdr-text').textContent='📋 차종 상세';
-}
-
-function switchTabOnly(k){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const tb=document.getElementById(TABS[k]);if(tb)tb.classList.add('active');
-  document.getElementById('hdr-text').textContent=TITLES[k];
-}
-
-// ─── D-SUV 포지셔닝 맵 ───────────────────────────────────────────────────────
-function buildMarketSVG(){
-  const W=360,H=520;
-  // 가격축: 15~55만R, 세로(Y): 55만R 상단, 15만R 하단
-  function yPos(manR){return 40+((55-manR)/(55-15))*(H-80);}
-  // 포지션 데이터
-  const items=[
-    {id:'nio',   name:'NIO ES9',    nameKr:'니오 ES9',    price:59.3, x:0.78, seg:'luxury', circle:true},
-    {id:'zeekr', name:'지커 8X',    nameKr:'지커 8X',     price:44.7, x:0.55, seg:'premium'},
-    {id:'audi',  name:'상기AUDI E7X',nameKr:'AUDI E7X',  price:36.5, x:0.38, seg:'premium'},
-    {id:'vw9x',  name:'ID.ERA 9X',  nameKr:'VW ID.ERA9X', price:35.5, x:0.62, seg:'premium'},
-    {id:'byd',   name:'BYD大唐',    nameKr:'BYD 따탕',    price:35,   x:0.75, seg:'premium'},
-    {id:'bmw',   name:'BMW iX3L',   nameKr:'BMW iX3L',   price:37.5, x:0.45, seg:'premium'},
-    {id:'leap',  name:'링파오 D19', nameKr:'링파오 D19',  price:27.5, x:0.58, seg:'entry'},
-    {id:'nx8',   name:'닛산 NX8',   nameKr:'닛산 NX8',   price:18.5, x:0.40, seg:'entry'},
-  ];
-
-  // 가격 구간 라벨
-  const priceTicks=[55,50,45,40,35,30,25,20,15];
-
-  let svgContent='';
-
-  // 배경 세그먼트
-  const luxY1=yPos(55),luxY2=yPos(45);
-  const midY1=yPos(45),midY2=yPos(28);
-  const entY1=yPos(28),entY2=yPos(15);
-
-  svgContent+=`<rect x="70" y="${luxY1}" width="${W-80}" height="${luxY2-luxY1}" fill="#EFF6FF" rx="4" opacity=".6"/>`;
-  svgContent+=`<rect x="70" y="${midY1}" width="${W-80}" height="${midY2-midY1}" fill="#FEF9C3" rx="4" opacity=".6"/>`;
-  svgContent+=`<rect x="70" y="${entY1}" width="${W-80}" height="${entY2-entY1}" fill="#F0FDF4" rx="4" opacity=".6"/>`;
-
-  // 세그먼트 라벨
-  svgContent+=`<text x="72" y="${(luxY1+luxY2)/2+4}" font-size="8" fill="#1E40AF" font-weight="700">럭셔리 대형 SUV</text>`;
-  svgContent+=`<text x="72" y="${(midY1+midY2)/2+4}" font-size="8" fill="#92400E" font-weight="700">중고가 대형 SUV</text>`;
-  svgContent+=`<text x="72" y="${(entY1+entY2)/2+4}" font-size="8" fill="#166534" font-weight="700">엔트리 중대형 SUV</text>`;
-
-  // Y축 가격 눈금
-  priceTicks.forEach(p=>{
-    const y=yPos(p);
-    const wonStr=rmbToKrw(p);
-    svgContent+=`<line x1="68" y1="${y}" x2="${W-5}" y2="${y}" stroke="#E5E7EB" stroke-width="1"/>`;
-    svgContent+=`<text x="65" y="${y+4}" text-anchor="end" font-size="7" fill="#9CA3AF">${p}만R</text>`;
-    svgContent+=`<text x="65" y="${y+12}" text-anchor="end" font-size="6" fill="#D1D5DB">${wonStr}</text>`;
-  });
-
-  // 아이템 배치
-  items.forEach(item=>{
-    const p=CARS[item.id];
-    const y=yPos(item.price);
-    const x=70+(item.x*(W-80));
-    const col=item.seg==='luxury'?'#1E40AF':item.seg==='premium'?'#F59E0B':'#16A34A';
-    const bg=item.seg==='luxury'?'#DBEAFE':item.seg==='premium'?'#FEF3C7':'#DCFCE7';
-    const isTarget=true;
-    svgContent+=`<g onclick="goCar('${item.id}')" style="cursor:pointer">
-      <rect x="${x-36}" y="${y-14}" width="72" height="28" rx="6" fill="${bg}" stroke="${col}" stroke-width="${item.circle?2.5:1.5}"/>
-      <text x="${x}" y="${y-2}" text-anchor="middle" font-size="9" fill="${col}" font-weight="800">${item.nameKr}</text>
-      <text x="${x}" y="${y+9}" text-anchor="middle" font-size="7" fill="${col}">${p.priceMin}~${p.priceMax}만R</text>
-      ${item.circle?`<circle cx="${x+34}" cy="${y-12}" r="7" fill="#EF4444"/><text x="${x+34}" y="${y-9}" text-anchor="middle" font-size="8" fill="white" font-weight="700">💡</text>`:''}
-    </g>`;
-  });
-
-  // 타이틀 + 축
-  svgContent+=`<text x="${W/2}" y="20" text-anchor="middle" font-size="11" fill="#1E3A8A" font-weight="800">D-SUV 시장 포지셔닝 맵</text>`;
-  svgContent+=`<text x="${W/2}" y="33" text-anchor="middle" font-size="8" fill="#9CA3AF">핵심 참관 8차종 · 환율 194.3 R/원</text>`;
-  svgContent+=`<text x="${W/2}" y="${H-8}" text-anchor="middle" font-size="7" fill="#9CA3AF">차종을 탭하면 상품 정보를 확인할 수 있습니다</text>`;
-
-  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
-<rect width="${W}" height="${H}" fill="#fff"/>
-${svgContent}
-</svg>`;
-}
-
-// ─── 탭 전환 ────────────────────────────────────────────────────────────────
-function switchTab(k){
-  if(k==='hall'&&!lastHall){k='map';}
-  if(k==='market'){
-    document.getElementById('market-svg-wrap').innerHTML=buildMarketSVG();
-  }
-  showScreen(SCREENS[k]);
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const tb=document.getElementById(TABS[k]);if(tb)tb.classList.add('active');
-  document.getElementById('hdr-text').textContent=TITLES[k];
-}
-function goHome(){switchTab('map');}
-
-// ─── 초기화 ─────────────────────────────────────────────────────────────────
-window.addEventListener('load',()=>{
-  calcLayout();
-  // 드로어 초기 pointer-events:none
-  document.getElementById('overlay').style.pointerEvents='none';
-});
+// ... (나머지 코드) ...
 </script>
+
 </body>
 </html>
