@@ -374,7 +374,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'Apple SD Gothic
     <span class="ct-arr">›</span>
   </div>
   <div class="car-tile" onclick="goCar('zeekr')">
-    <div class="ct-img"><img src="images/zeekr.webp" alt="zeekr" style="width:100%;height:auto;object-fit:cover;" onerror="this.style.display='none'"></div>
+    <div class="ct-img"><img src="images/zeekr.jpg" alt="zeekr" style="width:100%;height:auto;object-fit:cover;" onerror="this.style.display='none'"></div>
     <div class="ct-body">
       <div class="ct-name">지커(Zeekr) 8X</div>
       <div class="ct-cn">极氪 8X</div>
@@ -914,7 +914,9 @@ function goCar(id){
       <button class="back-btn" onclick="goHall('${p.hallId}')">🏢 ${p.hall.split('·')[0].trim()}</button>
     </div>
     <div class="p-hero">
-      <div class="p-hero-img-placeholder">${p.emoji}</div>
+      <img class="p-hero-img" src="${p.image}" alt="${p.name}"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="p-hero-img-placeholder" style="display:none">${p.emoji}</div>
       <div class="p-hero-body">
         <div class="launch">💡 핵심 참관 차종 · ${p.launch}</div>
         <div class="p-name">${p.name}</div>
