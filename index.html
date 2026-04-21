@@ -473,16 +473,6 @@ function showScreen(sid){
   document.getElementById(sid).classList.add('active');
   document.getElementById(sid).scrollTop=0;
 }
-function switchTab(k){
-  if(k==='hall'&&!lastHall){k='map';}
-  showScreen(SCREENS[k]);
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const tb=document.getElementById(TABS[k]);
-  if(tb) tb.classList.add('active');
-  document.getElementById('hdr-text').textContent=TITLES[k];
-}
-function goHome(){switchTab('map');}
-
 // ─── 환율 변환 ───────────────────────────────────────────────────────────────
 const RATE=194.3; // 1 R = 194.3원
 function rmbToKrw(man){
@@ -534,66 +524,100 @@ const HALLS={
     booths:[
       {num:'A301',kr:'동풍 그룹',cn:'东风汽车集团',t:'n'},
       {num:'A302',kr:'동풍 PSA (Stellantis)',cn:'东风标致雪铁龙',t:'n'},
-    ],svg:buildGenSVG('A3','A区3馆',[{n:'A301',k:'동풍그룹 (东风汽车)',t:false},{n:'A302',k:'동풍 PSA · Stellantis',t:false}])},
+    ],svg:buildA3SVG()},
   A4:{name:'A4홀',cn:'A区4馆',venue:'CIECC',time:'⏱ 참고',
     booths:[
       {num:'A401',kr:'리오토 (Li Auto)',cn:'理想汽车',t:'n'},
       {num:'A402',kr:'샤오미 EV (Xiaomi)',cn:'小米汽车',t:'n'},
-    ],svg:buildGenSVG('A4','A区4馆',[{n:'A401',k:'리오토 (理想汽车)',t:false},{n:'A402',k:'샤오미 EV (小米汽车)',t:false}])},
+      {num:'A403',kr:'지지 IM Motors',cn:'智己汽车',t:'n'},
+      {num:'A404',kr:'뷰익 (Buick)',cn:'别克',t:'n'},
+      {num:'A407',kr:'대통 MAXUS',cn:'大通汽车',t:'n'},
+      {num:'A408',kr:'혼다 (Honda)',cn:'本田',t:'n'},
+      {num:'A409',kr:'포드 (Ford)',cn:'福特汽车',t:'n'},
+    ],svg:buildA4SVG()},
   B4:{name:'B4홀',cn:'B区4馆',venue:'CIECC',time:'⏱ 예상 20분',
     booths:[
-      {num:'B401',kr:'볼보 (Volvo)',cn:'沃尔沃汽车',t:'n'},
-      {num:'B402',kr:'장화이 (JAC)',cn:'江淮汽车',t:'n'},
+      {num:'B401',kr:'迈莎锐 (Maserati)',cn:'迈莎锐',t:'n'},
       {num:'B403',kr:'💡 링파오 D19',cn:'零跑汽车 D19',t:'target',pid:'leap'},
-      {num:'B404',kr:'Momenta (모멘타)',cn:'Momenta AI',t:'n'},
+      {num:'B404',kr:'볼보 (Volvo)',cn:'沃尔沃汽车',t:'n'},
+      {num:'B405',kr:'장화이 JAC그룹',cn:'江汽集团',t:'n'},
       {num:'B406',kr:'HIMA (화웨이 계열)',cn:'鸿蒙智行',t:'n'},
-      {num:'B409',kr:'Sunwoda (선우다)',cn:'新旺达',t:'n'},
-    ],svg:buildGenSVG('B4','B区4馆',[
-      {n:'B401',k:'볼보 (Volvo)',t:false},{n:'B402',k:'장화이 (JAC)',t:false},
-      {n:'B403',k:'💡링파오 D19',t:true,pid:'leap'},{n:'B404',k:'Momenta AI',t:false},
-      {n:'B406',k:'HIMA 화웨이계열',t:false},{n:'B409',k:'Sunwoda',t:false}])},
+      {num:'B407',kr:'Momenta (모멘타)',cn:'Momenta AI',t:'n'},
+      {num:'B409',kr:'Sunwoda (선우다)',cn:'欣旺达动力',t:'n'},
+    ],svg:buildB4SVG()},
   B5:{name:'B5홀',cn:'B区5馆',venue:'CIECC',time:'⏱ 예상 20분',
     booths:[
-      {num:'B501~502',kr:'GWM 장성 (포어·탱크·하발)',cn:'长城炮·坦克·哈弗',t:'n'},
-      {num:'B502',kr:'오라·웨이 (Ora·Wey)',cn:'欧拉·魏牌',t:'n'},
+      {num:'B501',kr:'GWM 장성 (포어·탱크·하발)',cn:'长城炮·坦克·哈弗',t:'n'},
+      {num:'B502',kr:'GWM 장성 (오라·웨이·링혼)',cn:'欧拉·魏牌·长城灵魂',t:'n'},
       {num:'B504',kr:'💡 동풍닛산 NX8 (+인피니티)',cn:'东风日产 NX8 + 英菲尼迪',t:'target',pid:'nx8'},
-      {num:'B505',kr:'Rox Motor',cn:'Rox Motor',t:'n'},
+      {num:'B505',kr:'극석 ROX Motor',cn:'极石 ROX',t:'n'},
       {num:'B506',kr:'MG (名爵)',cn:'MG名爵',t:'n'},
       {num:'B507',kr:'로위 (Roewe)',cn:'荣威汽车',t:'n'},
-    ],svg:buildGenSVG('B5','B区5馆',[
-      {n:'B501',k:'GWM 포어·탱크·하발',t:false},{n:'B502',k:'오라·웨이(Ora·Wey)',t:false},
-      {n:'B504',k:'💡동풍닛산 NX8',t:true,pid:'nx8'},{n:'B505',k:'Rox Motor',t:false},
-      {n:'B506',k:'MG (名爵)',t:false},{n:'B507',k:'로위 (Roewe)',t:false}])},
+      {num:'B508',kr:'상제 (尚界)',cn:'尚界',t:'n'},
+    ],svg:buildB5SVG()},
   E1:{name:'E1홀',cn:'E区1馆',venue:'CIEC Shunyi',time:'⏱ 참고',
-    booths:[{num:'E106',kr:'Luxeed (路特斯)',cn:'Lotus Tech',t:'n'}],
-    svg:buildGenSVG('E1','E区1馆',[{n:'E106',k:'Luxeed 路特斯',t:false}])},
+    booths:[
+      {num:'E101',kr:'iCAR',cn:'iCAR',t:'n'},
+      {num:'E102',kr:'星途 EXEED',cn:'星途汽车',t:'n'},
+      {num:'E103',kr:'纵横 ZONGHENG',cn:'纵横汽车',t:'n'},
+      {num:'E104',kr:'捷途 JETOUR',cn:'捷途汽车',t:'n'},
+      {num:'E105',kr:'치루이 CHERY',cn:'奇瑞汽车',t:'n'},
+      {num:'E106',kr:'Luxeed 智界',cn:'智界汽车',t:'n'},
+    ],svg:buildE1SVG()},
   E2:{name:'E2홀',cn:'E区2馆',venue:'CIEC Shunyi',time:'⏱ 예상 20~40분',
     booths:[
       {num:'E201',kr:'Aito (문계 问界)',cn:'赛力斯问界',t:'n'},
       {num:'E202',kr:'🔵 샤오펑 (Xpeng)',cn:'小鹏汽车 Physical AI',t:'blue'},
       {num:'E203',kr:'💡 NIO (Onvo·Firefly)',cn:'蔚来(乐道·萤火虫)',t:'target',pid:'nio'},
+      {num:'E204',kr:'驭美同行',cn:'驭美同行',t:'n'},
+      {num:'E205',kr:'Oritek 欧冶半导体',cn:'欧冶半导体',t:'n'},
     ],svg:buildE2SVG()},
   E3:{name:'E3홀',cn:'E区3馆',venue:'CIEC Shunyi',time:'⏱ 예상 20분',
     booths:[
       {num:'E301',kr:'덴자 (Denza)',cn:'腾势汽车',t:'n'},
       {num:'E302',kr:'💡 BYD 大唐 (따탕)',cn:'比亚迪大唐',t:'target',pid:'byd'},
       {num:'E303',kr:'양왕 (Yangwang)',cn:'仰望汽车',t:'n'},
-      {num:'E304',kr:'BYD 충전존 天神之眼',cn:'比亚迪闪充',t:'n'},
+      {num:'E304',kr:'BYD 플래시 충전',cn:'比亚迪闪充',t:'n'},
       {num:'E305',kr:'팡청바오',cn:'方程豹',t:'n'},
-    ],svg:buildGenSVG('E3','E区3馆',[
-      {n:'E301',k:'덴자(Denza 腾势)',t:false},
-      {n:'E302',k:'💡BYD 大唐(따탕)',t:true,pid:'byd'},
-      {n:'E303',k:'양왕(仰望)',t:false},{n:'E304',k:'BYD 천신즈옌',t:false},{n:'E305',k:'팡청바오(方程豹)',t:false}])},
+      {num:'E306',kr:'BYD 天神之眼',cn:'比亚迪天神之眼',t:'n'},
+    ],svg:buildE3SVG()},
   E4:{name:'E4홀',cn:'E区4馆',venue:'CIEC Shunyi',time:'⏱ 예상 20분',
     booths:[
-      {num:'E401',kr:'🔵 현대자동차 (Hyundai)',cn:'现代汽车',t:'blue'},
+      {num:'E401',kr:'🔵 현대자동차 (Hyundai)',cn:'现代汽车及北京现代',t:'blue'},
       {num:'E402',kr:'Mercedes-Benz (벤츠)',cn:'梅赛德斯-奔驰',t:'n'},
-    ],svg:buildGenSVG('E4','E区4馆',[
-      {n:'E401',k:'🔵현대자동차(Hyundai)',t:false,hl:true},
-      {n:'E402',k:'Mercedes-Benz 벤츠',t:false}])},
-  W1:{name:'W1홀',cn:'W区1馆',venue:'CIEC Shunyi',time:'⏱ 참고',booths:[{num:'-',kr:'부품 전시 구역',cn:'零部件展区',t:'n'}],svg:buildGenSVG('W1','W区1馆',[{n:'-',k:'부품 전시(零部件展区)',t:false}])},
-  W2:{name:'W2홀',cn:'W区2馆',venue:'CIEC Shunyi',time:'⏱ 참고',booths:[{num:'-',kr:'부품 전시 구역',cn:'零部件展区',t:'n'}],svg:buildGenSVG('W2','W区2馆',[{n:'-',k:'부품 전시(零部件展区)',t:false}])},
-  W3:{name:'W3홀',cn:'W区3馆',venue:'CIEC Shunyi',time:'⏱ 참고',booths:[{num:'-',kr:'미디어 전시 구역',cn:'媒体展区',t:'n'}],svg:buildGenSVG('W3','W区3馆',[{n:'-',k:'미디어 전시(媒体展区)',t:false}])},
+      {num:'E403',kr:'BAIC 북기그룹',cn:'北汽集团(享界·极狐·越野)',t:'n'},
+      {num:'E404',kr:'smart',cn:'smart',t:'n'},
+      {num:'E4-W01',kr:'BAIC 별관',cn:'BAIC北汽集团',t:'n'},
+    ],svg:buildE4SVG()},
+  W1:{name:'W1홀',cn:'W区1馆',venue:'CIEC Shunyi',time:'⏱ 참고',
+    booths:[
+      {num:'W1B01',kr:'안스타모 (ZF)',cn:'安斯泰莫',t:'n'},
+      {num:'W1B02',kr:'중처스다이',cn:'中车时代',t:'n'},
+      {num:'W1B03',kr:'耐世特',cn:'耐世特',t:'n'},
+      {num:'W1B04',kr:'爱尔铃克铃尔',cn:'爱尔铃克铃尔',t:'n'},
+      {num:'W1B05',kr:'항저우지장',cn:'杭州之江',t:'n'},
+      {num:'W1B40',kr:'상담 회의구역 1',cn:'商务会议区一',t:'n'},
+      {num:'W1C10',kr:'孔辉科技',cn:'孔辉科技',t:'n'},
+      {num:'W1C30',kr:'상담 회의구역 2',cn:'商务会议区二',t:'n'},
+    ],svg:buildW1SVG()},
+  W2:{name:'W2홀',cn:'W区2馆',venue:'CIEC Shunyi',time:'⏱ 참고',
+    booths:[
+      {num:'W2B01',kr:'보그워너 (BorgWarner)',cn:'博格华纳',t:'n'},
+      {num:'W2B08',kr:'마렐리 (Marelli)',cn:'马瑞利',t:'n'},
+      {num:'W2B32',kr:'德昌电机 JE',cn:'德昌电机',t:'n'},
+      {num:'W2C20',kr:'중국자동차연구원 CAERI',cn:'中国汽研',t:'n'},
+      {num:'W2M04',kr:'百度有驾',cn:'百度有驾',t:'n'},
+      {num:'W2M12',kr:'太平洋汽车',cn:'太平洋汽车',t:'n'},
+    ],svg:buildW2SVG()},
+  W3:{name:'W3홀',cn:'W区3馆',venue:'CIEC Shunyi',time:'⏱ 참고',
+    booths:[
+      {num:'W301',kr:'화웨이 乾崑',cn:'华为乾崑',t:'n'},
+      {num:'W302',kr:'猛士汽车',cn:'猛士汽车',t:'n'},
+      {num:'W303',kr:'아바타 (AVATR)',cn:'阿维塔汽车',t:'n'},
+      {num:'W304',kr:'화웨이 乾崑·启境',cn:'华为乾崑·启境',t:'n'},
+      {num:'W305',kr:'奕境',cn:'奕境',t:'n'},
+      {num:'W307',kr:'화웨이 디지털에너지',cn:'华为数字能源',t:'n'},
+    ],svg:buildW3SVG()},
   W4:{name:'W4홀',cn:'W区4馆',venue:'CIEC Shunyi',time:'⏱ 예상 20분',
     booths:[
       {num:'W401',kr:'CATL (닝더스다이)',cn:'宁德时代',t:'n'},
@@ -601,12 +625,10 @@ const HALLS={
       {num:'W403b',kr:'MINI',cn:'MINI',t:'n'},
       {num:'W404',kr:'포르쉐 (Porsche)',cn:'保时捷',t:'n'},
       {num:'W405',kr:'Toyota Boshoku',cn:'丰田纺织',t:'n'},
+      {num:'W406',kr:'傲旋 (AUXUN)',cn:'傲旋',t:'n'},
+      {num:'W407',kr:'로터스 (Lotus)',cn:'莲花',t:'n'},
       {num:'W4-W01',kr:'Toyota (토요타)',cn:'丰田汽车',t:'n'},
-    ],svg:buildGenSVG('W4','W区4馆',[
-      {n:'W401',k:'CATL(宁德时代)',t:false},
-      {n:'W402',k:'💡BMW iX3L(宝马)',t:true,pid:'bmw'},
-      {n:'W403',k:'MINI',t:false},{n:'W404',k:'포르쉐(保时捷)',t:false},
-      {n:'W405',k:'Toyota Boshoku',t:false},{n:'W4-W01',k:'토요타(丰田)',t:false}])},
+    ],svg:buildW4SVG()},
 };
 
 // ─── SVG 빌더 ─────────────────────────────────────────────────────────────────
@@ -734,67 +756,703 @@ function buildA2SVG(){
 </svg>`;
 }
 
-function buildE2SVG(){
-  return `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:320px;">
-<rect width="360" height="220" fill="#FFFBEB" rx="6"/>
-<rect width="360" height="30" fill="#1E40AF" rx="6"/>
-<text x="10" y="12" font-size="14" fill="white" font-weight="800">E2</text>
-<text x="180" y="12" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
-<text x="10" y="26" font-size="7" fill="#93C5FD">E区2馆 · CIEC Shunyi 순이관</text>
-<text x="180" y="42" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (⑥번 동선)</text>
-<rect x="8" y="48" width="105" height="100" rx="5" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-<text x="60" y="70" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">E201</text>
-<text x="60" y="86" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">Aito</text>
-<text x="60" y="100" text-anchor="middle" font-size="8" fill="#9CA3AF">문계 问界</text>
-<text x="60" y="112" text-anchor="middle" font-size="7" fill="#9CA3AF">赛力斯问界</text>
-<rect x="120" y="48" width="108" height="100" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2.5"/>
-<text x="174" y="70" text-anchor="middle" font-size="8" fill="#1E40AF" font-weight="700">E202</text>
-<text x="174" y="88" text-anchor="middle" font-size="13" fill="#1E40AF" font-weight="800">🔵샤오펑</text>
-<text x="174" y="103" text-anchor="middle" font-size="8" fill="#1E40AF">小鹏汽车 Xpeng</text>
-<text x="174" y="116" text-anchor="middle" font-size="7" fill="#3B82F6">Physical AI</text>
-<text x="174" y="128" text-anchor="middle" font-size="7" fill="#1E40AF">비행차·로봇 전시</text>
-<rect x="236" y="48" width="116" height="100" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('nio')" style="cursor:pointer"/>
-<text x="294" y="70" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">E203</text>
-<text x="294" y="88" text-anchor="middle" font-size="13" fill="#92400E" font-weight="800">💡 NIO</text>
-<text x="294" y="103" text-anchor="middle" font-size="8" fill="#B45309">蔚来 ES9</text>
-<text x="294" y="115" text-anchor="middle" font-size="7" fill="#92400E">Onvo·Firefly</text>
-<text x="294" y="127" text-anchor="middle" font-size="7" fill="#EA580C">탭→상품정보</text>
-<text x="180" y="165" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
-<rect x="4" y="172" width="352" height="15" rx="4" fill="#FEF3C7"/>
-<text x="180" y="183" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상: NIO 20분 + 샤오펑 참고 관람</text>
-</svg>`;
-}
+function buildA3SVG(){
+  return `<svg viewBox="0 0 380 286" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="286" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E3A8A" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">A3</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">A区3馆 · CIECC</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단행 A301~A306 -->
+<rect x="8" y="50" width="128" height="86" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="72" y="82" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A301</text>
+<text x="72" y="98" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">동풍그룹</text>
+<text x="72" y="112" text-anchor="middle" font-size="7" fill="#9CA3AF">东风汽车集团</text>
+<rect x="140" y="50" width="62" height="86" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="171" y="78" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A302</text>
+<text x="171" y="92" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">PSA</text>
+<text x="171" y="104" text-anchor="middle" font-size="6" fill="#9CA3AF">Stellantis</text>
+<text x="171" y="115" text-anchor="middle" font-size="6" fill="#9CA3AF">标致雪铁龙</text>
+<rect x="206" y="50" width="40" height="86" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="226" y="80" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A303</text>
+<text x="226" y="96" text-anchor="middle" font-size="8" fill="#6B7280">四维</text>
+<text x="226" y="108" text-anchor="middle" font-size="7" fill="#9CA3AF">图新</text>
+<rect x="250" y="50" width="80" height="86" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="290" y="75" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A304</text>
+<text x="290" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">上汽通用五菱</text>
+<text x="290" y="103" text-anchor="middle" font-size="7" fill="#9CA3AF">GM Wuling</text>
+<rect x="334" y="50" width="38" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="353" y="64" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A305</text>
+<text x="353" y="79" text-anchor="middle" font-size="7" fill="#9CA3AF">万安VIE</text>
+<rect x="334" y="96" width="38" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="353" y="110" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A306</text>
+<text x="353" y="125" text-anchor="middle" font-size="7" fill="#9CA3AF">中汽中心</text>
+<!-- 구분선 -->
+<line x1="8" y1="143" x2="372" y2="143" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단행 A307~A312 -->
+<rect x="8" y="151" width="38" height="86" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="27" y="170" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">A312</text>
+<text x="27" y="185" text-anchor="middle" font-size="6" fill="#9CA3AF">京津翼</text>
+<text x="27" y="196" text-anchor="middle" font-size="6" fill="#9CA3AF">智能网联</text>
+<rect x="50" y="151" width="36" height="86" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="68" y="174" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A311</text>
+<text x="68" y="190" text-anchor="middle" font-size="7" fill="#9CA3AF">小马</text>
+<text x="68" y="202" text-anchor="middle" font-size="7" fill="#9CA3AF">智行</text>
+<rect x="90" y="151" width="36" height="86" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="108" y="174" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A310</text>
+<text x="108" y="190" text-anchor="middle" font-size="7" fill="#9CA3AF">火山引擎</text>
+<rect x="130" y="151" width="38" height="86" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="149" y="170" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A309</text>
+<text x="149" y="184" text-anchor="middle" font-size="6" fill="#9CA3AF">汽车芯片</text>
+<text x="149" y="196" text-anchor="middle" font-size="6" fill="#9CA3AF">联盟</text>
+<!-- A308 광치그룹 대형 -->
+<rect x="172" y="151" width="130" height="86" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="237" y="169" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A308 广汽集团 GAC GROUP</text>
+<text x="210" y="188" text-anchor="middle" font-size="8" fill="#9CA3AF">传祺 GAC</text>
+<text x="237" y="206" text-anchor="middle" font-size="10" fill="#6B7280" font-weight="800">埃安 AION</text>
+<text x="267" y="188" text-anchor="middle" font-size="7" fill="#9CA3AF">昊铂 Hyptec</text>
+<!-- A307 GAC 링청 -->
+<rect x="306" y="151" width="66" height="86" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="339" y="174" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A307</text>
+<text x="339" y="192" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">广汽领程</text>
+<text x="339" y="206" text-anchor="middle" font-size="6" fill="#9CA3AF">GAC COMM.</text>
+<text x="190" y="250" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="256" width="372" height="16" rx="4" fill="#E5E7EB"/>
+<text x="190" y="267" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">A3홀 · 동풍그룹 · 광치GAC그룹 전시관</text>
+</svg>`;}
 
-function buildGenSVG(name,cn,booths){
-  const cols=2;const bw=168;const bh=62;const pad=8;const topY=44;
-  const rows=Math.ceil(booths.length/cols);
-  const sw=cols*bw+(cols+1)*pad;
-  const sh=topY+rows*(bh+pad)+pad+28;
-  let cells=booths.map((b,i)=>{
-    const col=i%cols;const row=Math.floor(i/cols);
-    const x=pad+col*(bw+pad);const y=topY+row*(bh+pad);
-    const bg=b.t?'#FEF3C7':b.hl?'#DBEAFE':'#F3F4F6';
-    const sc=b.t?'#F59E0B':b.hl?'#3B82F6':'#D1D5DB';
-    const tc=b.t?'#92400E':b.hl?'#1E40AF':'#6B7280';
-    const sw2=b.t?2.5:1.5;
-    const clk=b.pid?`onclick="goCar('${b.pid}')" style="cursor:pointer"`:'' ;
-    const kr=b.k.length>18?b.k.slice(0,17)+'…':b.k;
-    return `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="5" fill="${bg}" stroke="${sc}" stroke-width="${sw2}" ${clk}/>
-<text x="${x+bw/2}" y="${y+16}" text-anchor="middle" font-size="8" fill="${tc}" font-weight="700">${b.n}</text>
-<text x="${x+bw/2}" y="${y+33}" text-anchor="middle" font-size="11" fill="${tc}" font-weight="800">${kr}</text>
-${b.t?`<text x="${x+bw/2}" y="${y+52}" text-anchor="middle" font-size="7" fill="#EA580C">탭하여 상품정보 확인 →</text>`:''}`;
-  }).join('');
-  return `<svg viewBox="0 0 ${sw} ${sh}" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:320px;">
-<rect width="${sw}" height="${sh}" fill="#F8FAFC" rx="6"/>
-<rect width="${sw}" height="30" fill="#1E40AF" rx="6"/>
-<text x="10" y="12" font-size="13" fill="#fff" font-weight="800">${name}</text>
-<text x="${sw/2}" y="12" text-anchor="middle" font-size="9" fill="#93C5FD">Auto China 2026</text>
-<text x="10" y="26" font-size="7" fill="#93C5FD">${cn}</text>
-<text x="${sw/2}" y="40" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
-${cells}
-<text x="${sw/2}" y="${sh-6}" text-anchor="middle" font-size="7" fill="#9CA3AF">Auto China 2026 · 탭하여 상품 정보 확인</text>
-</svg>`;
-}
+function buildA4SVG(){
+  return `<svg viewBox="0 0 380 292" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="292" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E3A8A" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">A4</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">A区4馆 · CIECC</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단행: 리오토·샤오미·지지·뷰익·카얼·유니티 -->
+<rect x="8" y="50" width="96" height="88" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="56" y="78" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A401</text>
+<text x="56" y="94" text-anchor="middle" font-size="13" fill="#6B7280" font-weight="800">理想</text>
+<text x="56" y="108" text-anchor="middle" font-size="7" fill="#9CA3AF">Li Auto</text>
+<rect x="108" y="50" width="90" height="88" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="153" y="78" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A402</text>
+<text x="153" y="94" text-anchor="middle" font-size="13" fill="#6B7280" font-weight="800">小米</text>
+<text x="153" y="108" text-anchor="middle" font-size="7" fill="#9CA3AF">Xiaomi EV</text>
+<rect x="202" y="50" width="62" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="233" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A403</text>
+<text x="233" y="92" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">智己汽车</text>
+<text x="233" y="105" text-anchor="middle" font-size="7" fill="#9CA3AF">IM Motors</text>
+<rect x="268" y="50" width="62" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="299" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A404</text>
+<text x="299" y="92" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">别克</text>
+<text x="299" y="106" text-anchor="middle" font-size="7" fill="#9CA3AF">Buick</text>
+<rect x="334" y="50" width="38" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="353" y="64" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A405</text>
+<text x="353" y="78" text-anchor="middle" font-size="6" fill="#9CA3AF">卡尔动力</text>
+<rect x="334" y="96" width="38" height="42" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="353" y="110" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A406</text>
+<text x="353" y="124" text-anchor="middle" font-size="6" fill="#9CA3AF">Unity中国</text>
+<!-- 구분선 -->
+<line x1="8" y1="145" x2="372" y2="145" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단행: A413·A414·A412·A411·A410·A409·A408·A407 -->
+<rect x="8" y="153" width="30" height="42" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="23" y="166" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">A413</text>
+<text x="23" y="178" text-anchor="middle" font-size="6" fill="#9CA3AF">芯驰</text>
+<rect x="8" y="199" width="30" height="42" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="23" y="212" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">A414</text>
+<text x="23" y="227" text-anchor="middle" font-size="6" fill="#9CA3AF">HERE</text>
+<rect x="42" y="153" width="36" height="88" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="60" y="178" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A412</text>
+<text x="60" y="194" text-anchor="middle" font-size="7" fill="#9CA3AF">斑马</text>
+<text x="60" y="206" text-anchor="middle" font-size="7" fill="#9CA3AF">智能</text>
+<rect x="82" y="153" width="46" height="88" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="105" y="178" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A411</text>
+<text x="105" y="194" text-anchor="middle" font-size="7" fill="#9CA3AF">长安</text>
+<text x="105" y="206" text-anchor="middle" font-size="7" fill="#9CA3AF">马自达</text>
+<rect x="132" y="153" width="42" height="88" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="153" y="178" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A410</text>
+<text x="153" y="194" text-anchor="middle" font-size="7" fill="#9CA3AF">元戎</text>
+<text x="153" y="206" text-anchor="middle" font-size="7" fill="#9CA3AF">启行</text>
+<rect x="178" y="153" width="60" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="208" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A409</text>
+<text x="208" y="194" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">福特</text>
+<text x="208" y="210" text-anchor="middle" font-size="7" fill="#9CA3AF">Ford</text>
+<rect x="242" y="153" width="64" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="274" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A408</text>
+<text x="274" y="194" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">本田</text>
+<text x="274" y="210" text-anchor="middle" font-size="7" fill="#9CA3AF">HONDA</text>
+<rect x="310" y="153" width="62" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="341" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">A407</text>
+<text x="341" y="194" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">大通</text>
+<text x="341" y="208" text-anchor="middle" font-size="7" fill="#9CA3AF">MAXUS</text>
+<text x="190" y="254" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="260" width="372" height="16" rx="4" fill="#E5E7EB"/>
+<text x="190" y="271" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">A4홀 · 리오토·샤오미·포드·혼다 전시관</text>
+</svg>`;}
+
+function buildB4SVG(){
+  return `<svg viewBox="0 0 380 288" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="288" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E3A8A" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">B4</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">B区4馆 · CIECC</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단행: B401·B403💡·B404·B405·B411·B410 -->
+<rect x="8" y="50" width="82" height="84" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="49" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B401</text>
+<text x="49" y="92" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">迈莎锐</text>
+<text x="49" y="106" text-anchor="middle" font-size="7" fill="#9CA3AF">Maserati</text>
+<!-- B403 링파오 💡 -->
+<rect x="94" y="50" width="84" height="84" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('leap')" style="cursor:pointer"/>
+<text x="136" y="72" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">B403</text>
+<text x="136" y="89" text-anchor="middle" font-size="13" fill="#92400E" font-weight="800">💡 링파오</text>
+<text x="136" y="104" text-anchor="middle" font-size="8" fill="#B45309">零跑 D19</text>
+<text x="136" y="116" text-anchor="middle" font-size="6" fill="#EA580C">탭→상품정보</text>
+<rect x="182" y="50" width="78" height="84" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="221" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B404</text>
+<text x="221" y="93" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">볼보</text>
+<text x="221" y="107" text-anchor="middle" font-size="7" fill="#9CA3AF">VOLVO</text>
+<rect x="264" y="50" width="74" height="84" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="301" y="74" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B405</text>
+<text x="301" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">江汽集团</text>
+<text x="301" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">JAC GROUP</text>
+<rect x="342" y="50" width="30" height="38" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="357" y="63" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">B411</text>
+<text x="357" y="78" text-anchor="middle" font-size="6" fill="#9CA3AF">东软</text>
+<rect x="342" y="96" width="30" height="38" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="357" y="109" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">B410</text>
+<text x="357" y="124" text-anchor="middle" font-size="6" fill="#9CA3AF">瑞发科</text>
+<!-- 구분선 -->
+<line x1="8" y1="141" x2="372" y2="141" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단행: B406·B407·B409·B408 -->
+<rect x="8" y="149" width="164" height="88" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="90" y="171" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B406</text>
+<text x="90" y="190" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">鸿蒙智行</text>
+<text x="90" y="206" text-anchor="middle" font-size="8" fill="#9CA3AF">HIMA 화웨이계열</text>
+<rect x="176" y="149" width="100" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="226" y="171" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B407</text>
+<text x="226" y="190" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">MOMENTA</text>
+<text x="226" y="206" text-anchor="middle" font-size="7" fill="#9CA3AF">모멘타 AI</text>
+<rect x="280" y="149" width="92" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="326" y="162" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B409</text>
+<text x="326" y="178" text-anchor="middle" font-size="7" fill="#9CA3AF">欣旺达动力</text>
+<rect x="280" y="197" width="92" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="326" y="210" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B408</text>
+<text x="326" y="226" text-anchor="middle" font-size="7" fill="#9CA3AF">爱芯元智 Axera</text>
+<text x="190" y="250" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="256" width="372" height="16" rx="4" fill="#FEF3C7"/>
+<text x="190" y="267" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상 소요: 20분 (💡 링파오 D19 B403)</text>
+</svg>`;}
+
+function buildB5SVG(){
+  return `<svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="290" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E3A8A" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">B5</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">B区5馆 · CIECC</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단: B501(장성GWM대)·B502(장성GWM소)·B509 -->
+<rect x="8" y="50" width="166" height="88" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="91" y="68" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B501 · 长城汽车 GWM</text>
+<text x="56" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">长城炮</text>
+<text x="91" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">坦克</text>
+<text x="126" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">哈弗</text>
+<text x="56" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">POER</text>
+<text x="91" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">TANK</text>
+<text x="126" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">HAVAL</text>
+<rect x="178" y="50" width="150" height="88" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="253" y="68" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B502 · 长城汽车 GWM</text>
+<text x="210" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">欧拉</text>
+<text x="253" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">魏牌</text>
+<text x="298" y="90" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">灵魂</text>
+<text x="210" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">ORA</text>
+<text x="253" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">WEY</text>
+<text x="298" y="104" text-anchor="middle" font-size="7" fill="#9CA3AF">SOUO</text>
+<rect x="332" y="50" width="40" height="88" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="352" y="74" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">B509</text>
+<text x="352" y="90" text-anchor="middle" font-size="6" fill="#9CA3AF">富古</text>
+<text x="352" y="103" text-anchor="middle" font-size="6" fill="#9CA3AF">汽车</text>
+<!-- 구분선 -->
+<line x1="8" y1="145" x2="372" y2="145" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단: B503·B504💡·B505·B506·B507·B508 -->
+<rect x="8" y="153" width="30" height="88" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="23" y="174" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">B503</text>
+<text x="23" y="189" text-anchor="middle" font-size="6" fill="#9CA3AF">央视</text>
+<text x="23" y="201" text-anchor="middle" font-size="6" fill="#9CA3AF">新闻</text>
+<!-- B504 닛산 💡 -->
+<rect x="42" y="153" width="90" height="88" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('nx8')" style="cursor:pointer"/>
+<text x="87" y="172" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">B504</text>
+<text x="75" y="190" text-anchor="middle" font-size="10" fill="#92400E" font-weight="800">💡 日産</text>
+<text x="87" y="205" text-anchor="middle" font-size="7" fill="#B45309">NISSAN NX8</text>
+<text x="87" y="218" text-anchor="middle" font-size="6" fill="#EA580C">+英菲尼迪 탭→정보</text>
+<rect x="136" y="153" width="52" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="162" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B505</text>
+<text x="162" y="193" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">极石</text>
+<text x="162" y="207" text-anchor="middle" font-size="7" fill="#9CA3AF">ROX</text>
+<rect x="192" y="153" width="52" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="218" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B506</text>
+<text x="218" y="193" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">MG</text>
+<text x="218" y="207" text-anchor="middle" font-size="7" fill="#9CA3AF">名爵</text>
+<rect x="248" y="153" width="54" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="275" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B507</text>
+<text x="275" y="193" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">荣威</text>
+<text x="275" y="207" text-anchor="middle" font-size="7" fill="#9CA3AF">ROEWE</text>
+<rect x="306" y="153" width="66" height="88" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="339" y="176" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">B508</text>
+<text x="339" y="193" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">尚界</text>
+<text x="190" y="253" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="259" width="372" height="16" rx="4" fill="#FEF3C7"/>
+<text x="190" y="270" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상 소요: 20분 (💡 동풍닛산 NX8 B504)</text>
+</svg>`;}
+
+function buildE1SVG(){
+  return `<svg viewBox="0 0 380 306" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="306" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">E1</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">E区1馆 · CIEC Shunyi 순이관</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 좌측 세로 열: E110·E109·E108 -->
+<rect x="8" y="50" width="52" height="36" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="34" y="63" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E110</text>
+<text x="34" y="76" text-anchor="middle" font-size="6" fill="#9CA3AF">佑驾创新</text>
+<rect x="8" y="90" width="52" height="36" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="34" y="103" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E109</text>
+<text x="34" y="116" text-anchor="middle" font-size="6" fill="#9CA3AF">中科创达</text>
+<rect x="8" y="130" width="52" height="36" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="34" y="143" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E108</text>
+<text x="34" y="157" text-anchor="middle" font-size="6" fill="#9CA3AF">黑芝麻智能</text>
+<!-- 상단 중앙: E106 지지/Luxeed (중형), E105 치루이/CHERY (대형) -->
+<rect x="64" y="50" width="92" height="116" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="110" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E106</text>
+<text x="110" y="95" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">智界</text>
+<text x="110" y="110" text-anchor="middle" font-size="8" fill="#9CA3AF">LUXEED</text>
+<text x="110" y="124" text-anchor="middle" font-size="7" fill="#9CA3AF">华为生态</text>
+<rect x="160" y="50" width="212" height="116" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="266" y="78" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E105</text>
+<text x="266" y="100" text-anchor="middle" font-size="16" fill="#6B7280" font-weight="800">奇瑞</text>
+<text x="266" y="118" text-anchor="middle" font-size="9" fill="#9CA3AF">CHERY</text>
+<text x="266" y="132" text-anchor="middle" font-size="7" fill="#9CA3AF">奇瑞汽车</text>
+<!-- 구분선 -->
+<line x1="8" y1="173" x2="372" y2="173" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단행: E101·E102·E103·E104 -->
+<rect x="8" y="181" width="96" height="82" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="56" y="204" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E101</text>
+<text x="56" y="222" text-anchor="middle" font-size="14" fill="#6B7280" font-weight="800">iCAR</text>
+<text x="56" y="237" text-anchor="middle" font-size="7" fill="#9CA3AF">奇瑞旗下</text>
+<rect x="108" y="181" width="72" height="82" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="144" y="204" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E102</text>
+<text x="144" y="222" text-anchor="middle" font-size="10" fill="#6B7280" font-weight="700">星途</text>
+<text x="144" y="236" text-anchor="middle" font-size="7" fill="#9CA3AF">EXEED</text>
+<rect x="184" y="181" width="72" height="82" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="220" y="204" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E103</text>
+<text x="220" y="222" text-anchor="middle" font-size="10" fill="#6B7280" font-weight="700">纵横</text>
+<text x="220" y="236" text-anchor="middle" font-size="7" fill="#9CA3AF">ZONGHENG</text>
+<rect x="260" y="181" width="112" height="82" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="316" y="204" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E104</text>
+<text x="316" y="222" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">捷途汽车</text>
+<text x="316" y="236" text-anchor="middle" font-size="7" fill="#9CA3AF">JETOUR AUTO</text>
+<text x="190" y="275" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="281" width="372" height="16" rx="4" fill="#E5E7EB"/>
+<text x="190" y="292" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">E1홀 · 치루이·지지LUXEED·iCAR 전시관</text>
+</svg>`;}
+
+function buildE2SVG(){
+  return `<svg viewBox="0 0 380 286" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="286" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">E2</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">E区2馆 · CIEC Shunyi 순이관 (⑥번 동선)</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단: E201 문계(좌), E202 샤오펑🔵(우) -->
+<rect x="8" y="50" width="166" height="92" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="91" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E201</text>
+<text x="91" y="96" text-anchor="middle" font-size="14" fill="#6B7280" font-weight="800">问界</text>
+<text x="91" y="112" text-anchor="middle" font-size="8" fill="#9CA3AF">Aito · 赛力斯</text>
+<rect x="178" y="50" width="194" height="92" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2.5"/>
+<text x="275" y="72" text-anchor="middle" font-size="7" fill="#1E40AF" font-weight="700">E202</text>
+<text x="275" y="91" text-anchor="middle" font-size="14" fill="#1E40AF" font-weight="800">🔵 小鹏</text>
+<text x="275" y="107" text-anchor="middle" font-size="8" fill="#1E40AF">Xpeng · Physical AI</text>
+<text x="275" y="120" text-anchor="middle" font-size="7" fill="#3B82F6">비행차·로봇 전시</text>
+<!-- 구분선 -->
+<line x1="8" y1="149" x2="372" y2="149" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단 좌측 소형: E204·E205 -->
+<rect x="8" y="157" width="60" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="38" y="171" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E204</text>
+<text x="38" y="185" text-anchor="middle" font-size="6" fill="#9CA3AF">驭美同行</text>
+<rect x="8" y="201" width="60" height="40" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="38" y="215" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E205</text>
+<text x="38" y="229" text-anchor="middle" font-size="6" fill="#9CA3AF">欧冶半导体</text>
+<!-- E203 NIO 대형 💡 -->
+<rect x="72" y="157" width="300" height="84" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('nio')" style="cursor:pointer"/>
+<text x="222" y="177" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">E203</text>
+<text x="222" y="200" text-anchor="middle" font-size="14" fill="#92400E" font-weight="800">💡 NIO 蔚来</text>
+<text x="180" y="218" text-anchor="middle" font-size="8" fill="#B45309">ONVO 乐道</text>
+<text x="265" y="218" text-anchor="middle" font-size="8" fill="#B45309">firefly 萤火虫</text>
+<text x="222" y="232" text-anchor="middle" font-size="7" fill="#EA580C">탭하여 상품정보 확인 →</text>
+<text x="190" y="253" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="259" width="372" height="16" rx="4" fill="#FEF3C7"/>
+<text x="190" y="270" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상: 💡 NIO 20분 + 🔵 샤오펑 참고 관람</text>
+</svg>`;}
+
+function buildE3SVG(){
+  return `<svg viewBox="0 0 380 294" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="294" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">E3</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">E区3馆 · CIEC Shunyi 순이관</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단 좌: E306 BYD 天神之眼 (세로 길게) -->
+<rect x="8" y="50" width="88" height="98" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="52" y="70" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E306</text>
+<text x="52" y="85" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">BYD</text>
+<text x="52" y="99" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">天神之眼</text>
+<text x="52" y="113" text-anchor="middle" font-size="6" fill="#9CA3AF">TianShen-BYD</text>
+<text x="52" y="124" text-anchor="middle" font-size="6" fill="#9CA3AF">Driving System</text>
+<!-- 상단 우 3칸: E305·E304·E303 -->
+<rect x="100" y="68" width="84" height="80" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="142" y="88" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E305</text>
+<text x="142" y="104" text-anchor="middle" font-size="10" fill="#6B7280" font-weight="700">方程豹</text>
+<text x="142" y="118" text-anchor="middle" font-size="6" fill="#9CA3AF">FANG CHENG BAO</text>
+<rect x="188" y="68" width="88" height="80" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="232" y="88" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E304</text>
+<text x="232" y="104" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">BYD闪充</text>
+<text x="232" y="118" text-anchor="middle" font-size="6" fill="#9CA3AF">BYD FLASH</text>
+<rect x="280" y="68" width="92" height="80" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="326" y="88" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E303</text>
+<text x="326" y="106" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">仰望</text>
+<text x="326" y="120" text-anchor="middle" font-size="7" fill="#9CA3AF">YANGWANG</text>
+<!-- BYD 그룹 구분 라벨 -->
+<rect x="8" y="155" width="364" height="18" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+<text x="190" y="167" text-anchor="middle" font-size="9" fill="#92400E" font-weight="800">比亚迪集团 BYD GROUP</text>
+<!-- 하단: E301 덴자(좌)·E302 BYD大唐💡(우 대형) -->
+<rect x="8" y="179" width="108" height="72" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="62" y="201" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E301</text>
+<text x="62" y="218" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">腾势</text>
+<text x="62" y="233" text-anchor="middle" font-size="7" fill="#9CA3AF">DENZA</text>
+<!-- E302 BYD大唐 💡 -->
+<rect x="120" y="179" width="252" height="72" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('byd')" style="cursor:pointer"/>
+<text x="246" y="199" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">E302</text>
+<text x="246" y="220" text-anchor="middle" font-size="14" fill="#92400E" font-weight="800">💡 BYD 大唐</text>
+<text x="246" y="237" text-anchor="middle" font-size="7" fill="#EA580C">따탕 · 탭→상품정보</text>
+<text x="190" y="263" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="269" width="372" height="16" rx="4" fill="#FEF3C7"/>
+<text x="190" y="280" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상 소요: 20분 (💡 BYD 大唐 E302)</text>
+</svg>`;}
+
+function buildE4SVG(){
+  return `<svg viewBox="0 0 380 274" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="274" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">E4</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">E区4馆 · CIEC Shunyi 순이관</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- E401 현대🔵 (상단 좌) -->
+<rect x="8" y="50" width="142" height="84" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2.5"/>
+<text x="79" y="72" text-anchor="middle" font-size="7" fill="#1E40AF" font-weight="700">E401</text>
+<text x="79" y="91" text-anchor="middle" font-size="12" fill="#1E40AF" font-weight="800">🔵 현대</text>
+<text x="79" y="107" text-anchor="middle" font-size="7" fill="#1E40AF">现代汽车及北京现代</text>
+<text x="79" y="120" text-anchor="middle" font-size="6" fill="#3B82F6">Hyundai &amp; Beijing Hyundai</text>
+<!-- E402 벤츠 (상단 중) -->
+<rect x="154" y="50" width="142" height="84" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="225" y="72" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E402</text>
+<text x="225" y="91" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">Mercedes-Benz</text>
+<text x="225" y="107" text-anchor="middle" font-size="7" fill="#9CA3AF">梅赛德斯-奔驰</text>
+<!-- E4-W01 BAIC 우측 별관 (양쪽 행 전체 높이) -->
+<rect x="300" y="50" width="72" height="170" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="336" y="86" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">E4-W01</text>
+<text x="336" y="102" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">BAIC</text>
+<text x="336" y="116" text-anchor="middle" font-size="7" fill="#9CA3AF">北汽集团</text>
+<!-- 구분선 -->
+<line x1="8" y1="141" x2="296" y2="141" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- E404 smart (하단 좌 소형) -->
+<rect x="8" y="149" width="56" height="71" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="36" y="172" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E404</text>
+<text x="36" y="191" text-anchor="middle" font-size="10" fill="#6B7280" font-weight="800">smart</text>
+<!-- E403 BAIC 三品牌 (하단 중) -->
+<rect x="68" y="149" width="228" height="71" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="182" y="169" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">E403 · BAIC 北汽集团</text>
+<text x="130" y="190" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">享界汽车</text>
+<text x="182" y="190" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">北汽极狐</text>
+<text x="234" y="190" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">北京越野</text>
+<text x="190" y="234" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="240" width="372" height="16" rx="4" fill="#DBEAFE"/>
+<text x="190" y="251" text-anchor="middle" font-size="8" fill="#1E40AF" font-weight="700">⏱ 예상 소요: 20분 (🔵 현대자동차 E401)</text>
+</svg>`;}
+
+function buildW1SVG(){
+  return `<svg viewBox="0 0 380 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="330" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">W1</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">W区1馆 · CIEC Shunyi · 자동차부품 전시</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구</text>
+<!-- 상단 소형 부품 전시열 -->
+<rect x="8" y="50" width="364" height="32" rx="4" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="190" y="62" text-anchor="middle" font-size="7" fill="#9CA3AF" font-weight="700">상단 소형 부품 전시 구역 (江苏超力·COSMX冠宇·江苏中成·烟台轩渥 등)</text>
+<text x="190" y="74" text-anchor="middle" font-size="6" fill="#9CA3AF">W1D 구역</text>
+<!-- Zone C 상단행 -->
+<rect x="8" y="90" width="72" height="60" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="44" y="110" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1C30</text>
+<text x="44" y="124" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">商务</text>
+<text x="44" y="137" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">会议区2</text>
+<rect x="84" y="90" width="52" height="60" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="110" y="110" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1C09</text>
+<text x="110" y="124" text-anchor="middle" font-size="7" fill="#9CA3AF">凌云</text>
+<text x="110" y="136" text-anchor="middle" font-size="6" fill="#9CA3AF">股份</text>
+<rect x="140" y="90" width="52" height="60" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="166" y="110" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1C06</text>
+<text x="166" y="124" text-anchor="middle" font-size="7" fill="#9CA3AF">思索</text>
+<text x="166" y="136" text-anchor="middle" font-size="6" fill="#9CA3AF">技术</text>
+<rect x="196" y="90" width="52" height="60" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="222" y="108" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1C05</text>
+<text x="222" y="122" text-anchor="middle" font-size="7" fill="#9CA3AF">联合</text>
+<text x="222" y="134" text-anchor="middle" font-size="6" fill="#9CA3AF">新能源</text>
+<rect x="252" y="90" width="44" height="60" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="274" y="110" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1C08</text>
+<text x="274" y="124" text-anchor="middle" font-size="7" fill="#9CA3AF">双益</text>
+<text x="274" y="136" text-anchor="middle" font-size="6" fill="#9CA3AF">精机</text>
+<rect x="300" y="90" width="44" height="60" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="322" y="110" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1C02</text>
+<text x="322" y="124" text-anchor="middle" font-size="7" fill="#9CA3AF">普热</text>
+<text x="322" y="136" text-anchor="middle" font-size="6" fill="#9CA3AF">斯勒</text>
+<rect x="348" y="90" width="24" height="60" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="360" y="118" text-anchor="middle" font-size="6" fill="#9CA3AF">孔辉</text>
+<!-- 구분선 C/B -->
+<line x1="8" y1="158" x2="372" y2="158" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="3,3"/>
+<!-- Zone B 하단행 -->
+<rect x="8" y="164" width="72" height="80" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="44" y="186" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B40</text>
+<text x="44" y="202" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">商务</text>
+<text x="44" y="215" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">会议区1</text>
+<text x="44" y="228" text-anchor="middle" font-size="6" fill="#9CA3AF">Meeting Area</text>
+<rect x="84" y="164" width="34" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="101" y="186" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B12</text>
+<text x="101" y="202" text-anchor="middle" font-size="7" fill="#9CA3AF">Deep</text>
+<text x="101" y="213" text-anchor="middle" font-size="7" fill="#9CA3AF">Drive</text>
+<rect x="122" y="164" width="36" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="140" y="186" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B10</text>
+<text x="140" y="202" text-anchor="middle" font-size="7" fill="#9CA3AF">五方</text>
+<text x="140" y="214" text-anchor="middle" font-size="7" fill="#9CA3AF">天雄</text>
+<rect x="162" y="164" width="38" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="181" y="186" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B06</text>
+<text x="181" y="202" text-anchor="middle" font-size="7" fill="#9CA3AF">东升</text>
+<text x="181" y="214" text-anchor="middle" font-size="7" fill="#9CA3AF">股份</text>
+<rect x="204" y="164" width="38" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="223" y="184" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B05</text>
+<text x="223" y="198" text-anchor="middle" font-size="7" fill="#9CA3AF">杭州</text>
+<text x="223" y="210" text-anchor="middle" font-size="6" fill="#9CA3AF">之江</text>
+<rect x="246" y="164" width="40" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="266" y="184" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B04</text>
+<text x="266" y="198" text-anchor="middle" font-size="6" fill="#9CA3AF">爱尔铃</text>
+<text x="266" y="210" text-anchor="middle" font-size="6" fill="#9CA3AF">克铃尔</text>
+<rect x="290" y="164" width="36" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="308" y="186" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B03</text>
+<text x="308" y="202" text-anchor="middle" font-size="7" fill="#9CA3AF">耐世特</text>
+<rect x="330" y="164" width="42" height="80" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="351" y="184" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W1B01</text>
+<text x="351" y="200" text-anchor="middle" font-size="7" fill="#9CA3AF">安斯</text>
+<text x="351" y="212" text-anchor="middle" font-size="7" fill="#9CA3AF">泰莫</text>
+<!-- 하단 소형 전시열 -->
+<rect x="8" y="252" width="364" height="28" rx="4" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="190" y="264" text-anchor="middle" font-size="7" fill="#9CA3AF" font-weight="700">하단 소형 전시 구역 (W1A 구역 — 다수 소형 부품사)</text>
+<text x="190" y="275" text-anchor="middle" font-size="6" fill="#9CA3AF">VIPEx · 해상위전 · 천주유리 · 사유건 · 정달주식 등</text>
+<text x="190" y="296" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="302" width="372" height="16" rx="4" fill="#E5E7EB"/>
+<text x="190" y="313" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">W1홀 · 자동차 부품·소재 전시관 (零部件展区)</text>
+</svg>`;}
+
+function buildW2SVG(){
+  return `<svg viewBox="0 0 380 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="330" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">W2</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">W区2馆 · CIEC Shunyi · 미디어·부품 전시</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구</text>
+<!-- 상단행: 미디어·연구기관 -->
+<rect x="8" y="50" width="44" height="52" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="30" y="68" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M14</text>
+<text x="30" y="82" text-anchor="middle" font-size="7" fill="#9CA3AF">新华网</text>
+<rect x="56" y="50" width="50" height="52" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="81" y="68" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M13</text>
+<text x="81" y="82" text-anchor="middle" font-size="7" fill="#9CA3AF">汽车之家</text>
+<rect x="110" y="50" width="52" height="52" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="136" y="68" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M12</text>
+<text x="136" y="82" text-anchor="middle" font-size="7" fill="#9CA3AF">太平洋</text>
+<text x="136" y="94" text-anchor="middle" font-size="7" fill="#9CA3AF">汽车</text>
+<!-- 中国汽研 CAERI 대형 -->
+<rect x="166" y="50" width="100" height="52" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="216" y="68" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2C20</text>
+<text x="216" y="82" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">中国汽研</text>
+<text x="216" y="95" text-anchor="middle" font-size="7" fill="#9CA3AF">CAERI</text>
+<rect x="270" y="50" width="42" height="24" rx="2" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="291" y="64" text-anchor="middle" font-size="6" fill="#9CA3AF">W2C15 STELLANTIS</text>
+<rect x="270" y="78" width="42" height="24" rx="2" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="291" y="92" text-anchor="middle" font-size="6" fill="#9CA3AF">W2C14 中汽标</text>
+<rect x="316" y="50" width="56" height="52" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="344" y="68" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2C01</text>
+<text x="344" y="82" text-anchor="middle" font-size="7" fill="#9CA3AF">亚太股份</text>
+<text x="344" y="94" text-anchor="middle" font-size="6" fill="#9CA3AF">APG</text>
+<!-- 중단행: 부품·공급업체 -->
+<line x1="8" y1="110" x2="372" y2="110" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="3,3"/>
+<rect x="8" y="118" width="60" height="68" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="38" y="136" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M04</text>
+<text x="38" y="150" text-anchor="middle" font-size="8" fill="#9CA3AF">百度</text>
+<text x="38" y="162" text-anchor="middle" font-size="8" fill="#9CA3AF">有驾</text>
+<rect x="72" y="118" width="68" height="68" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="106" y="136" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2B36</text>
+<text x="106" y="152" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">天倍科</text>
+<text x="106" y="164" text-anchor="middle" font-size="6" fill="#9CA3AF">腾易 INFLYNC</text>
+<text x="106" y="176" text-anchor="middle" font-size="6" fill="#9CA3AF">매핑·AD SW</text>
+<rect x="144" y="118" width="68" height="68" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="178" y="136" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2B32</text>
+<text x="178" y="152" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">德昌电机</text>
+<text x="178" y="166" text-anchor="middle" font-size="7" fill="#9CA3AF">JE Motor</text>
+<rect x="216" y="118" width="72" height="68" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="252" y="136" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2B15</text>
+<text x="252" y="152" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">菲利亚</text>
+<text x="252" y="165" text-anchor="middle" font-size="7" fill="#9CA3AF">Delphi</text>
+<rect x="292" y="118" width="80" height="68" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="332" y="136" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2B08</text>
+<text x="332" y="154" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">马瑞利</text>
+<text x="332" y="168" text-anchor="middle" font-size="7" fill="#9CA3AF">Marelli</text>
+<!-- 하단행: 미디어·박그워너 등 -->
+<line x1="8" y1="194" x2="372" y2="194" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="3,3"/>
+<rect x="8" y="202" width="60" height="68" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="38" y="220" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M10</text>
+<text x="38" y="234" text-anchor="middle" font-size="7" fill="#9CA3AF">网上</text>
+<text x="38" y="246" text-anchor="middle" font-size="7" fill="#9CA3AF">车市</text>
+<rect x="72" y="202" width="56" height="68" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="100" y="220" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M09</text>
+<text x="100" y="234" text-anchor="middle" font-size="7" fill="#9CA3AF">买车网</text>
+<text x="100" y="246" text-anchor="middle" font-size="6" fill="#9CA3AF">Boycar</text>
+<rect x="132" y="202" width="54" height="68" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="159" y="220" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">洽谈区</text>
+<text x="159" y="236" text-anchor="middle" font-size="7" fill="#9CA3AF">비즈니스</text>
+<text x="159" y="249" text-anchor="middle" font-size="7" fill="#9CA3AF">상담존</text>
+<rect x="190" y="202" width="80" height="68" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="230" y="220" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2B01</text>
+<text x="230" y="238" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">博格华纳</text>
+<text x="230" y="252" text-anchor="middle" font-size="7" fill="#9CA3AF">BorgWarner</text>
+<rect x="274" y="202" width="50" height="68" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="299" y="220" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M02</text>
+<text x="299" y="234" text-anchor="middle" font-size="7" fill="#9CA3AF">中国</text>
+<text x="299" y="246" text-anchor="middle" font-size="7" fill="#9CA3AF">汽车报</text>
+<rect x="328" y="202" width="44" height="68" rx="3" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="350" y="220" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W2M01</text>
+<text x="350" y="234" text-anchor="middle" font-size="7" fill="#9CA3AF">车讯网</text>
+<text x="190" y="284" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="290" width="372" height="16" rx="4" fill="#E5E7EB"/>
+<text x="190" y="301" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">W2홀 · 미디어·IT·부품 전시관</text>
+</svg>`;}
+
+function buildW3SVG(){
+  return `<svg viewBox="0 0 380 268" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="268" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">W3</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">W区3馆 · CIEC Shunyi · 화웨이 생태계관</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- 상단행: W301·W302·W307·W308 -->
+<rect x="8" y="50" width="188" height="84" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="102" y="74" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W301</text>
+<text x="102" y="93" text-anchor="middle" font-size="13" fill="#6B7280" font-weight="800">华为乾崑</text>
+<text x="102" y="108" text-anchor="middle" font-size="7" fill="#9CA3AF">Huawei HiCar</text>
+<rect x="200" y="50" width="88" height="84" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="244" y="74" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W302</text>
+<text x="244" y="93" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">猛士汽车</text>
+<text x="244" y="107" text-anchor="middle" font-size="7" fill="#9CA3AF">Dongfeng Meng</text>
+<rect x="292" y="50" width="80" height="38" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="332" y="64" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W307</text>
+<text x="332" y="78" text-anchor="middle" font-size="7" fill="#9CA3AF">华为数字能源</text>
+<rect x="292" y="96" width="80" height="38" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="332" y="110" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W308</text>
+<text x="332" y="124" text-anchor="middle" font-size="6" fill="#9CA3AF">汽车金融暨保值率</text>
+<!-- 구분선 -->
+<line x1="8" y1="141" x2="372" y2="141" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단행: W303·W304·W305·W306 -->
+<rect x="8" y="149" width="128" height="72" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="72" y="172" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W303</text>
+<text x="72" y="190" text-anchor="middle" font-size="12" fill="#6B7280" font-weight="800">阿维塔</text>
+<text x="72" y="206" text-anchor="middle" font-size="7" fill="#9CA3AF">AVATR</text>
+<rect x="140" y="149" width="90" height="72" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="185" y="172" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W304</text>
+<text x="185" y="190" text-anchor="middle" font-size="9" fill="#6B7280" font-weight="700">华为乾崑</text>
+<text x="185" y="205" text-anchor="middle" font-size="8" fill="#9CA3AF">启境</text>
+<rect x="234" y="149" width="88" height="72" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="278" y="172" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W305</text>
+<text x="278" y="192" text-anchor="middle" font-size="13" fill="#6B7280" font-weight="800">奕境</text>
+<rect x="326" y="149" width="46" height="72" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="349" y="172" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W306</text>
+<text x="349" y="190" text-anchor="middle" font-size="7" fill="#9CA3AF">云听</text>
+<text x="349" y="204" text-anchor="middle" font-size="6" fill="#9CA3AF">Ethereal</text>
+<text x="190" y="234" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="240" width="372" height="16" rx="4" fill="#E5E7EB"/>
+<text x="190" y="251" text-anchor="middle" font-size="8" fill="#6B7280" font-weight="700">W3홀 · 화웨이 乾崑 생태계·아바타·猛士 전시관</text>
+</svg>`;}
+
+function buildW4SVG(){
+  return `<svg viewBox="0 0 380 278" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:340px;">
+<rect width="380" height="278" fill="#EFF6FF" rx="6"/>
+<rect width="380" height="32" fill="#1E40AF" rx="6"/>
+<text x="10" y="13" font-size="15" fill="white" font-weight="800">W4</text>
+<text x="190" y="13" text-anchor="middle" font-size="10" fill="#93C5FD">Auto China 2026</text>
+<text x="10" y="27" font-size="8" fill="#93C5FD">W区4馆 · CIEC Shunyi 순이관</text>
+<text x="190" y="44" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▼ 입구/출구 (入口/出口)</text>
+<!-- W4-W01 토요타 별관 (좌측 독립) -->
+<rect x="8" y="50" width="56" height="168" rx="5" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="36" y="102" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W4-W01</text>
+<text x="36" y="120" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">丰田</text>
+<text x="36" y="136" text-anchor="middle" font-size="7" fill="#9CA3AF">TOYOTA</text>
+<text x="36" y="150" text-anchor="middle" font-size="6" fill="#9CA3AF">별관</text>
+<!-- W401 CATL (상단 중) -->
+<rect x="68" y="50" width="90" height="84" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="113" y="76" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W401</text>
+<text x="113" y="94" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">宁德时代</text>
+<text x="113" y="108" text-anchor="middle" font-size="7" fill="#9CA3AF">CATL</text>
+<!-- W402+W403 BMW+MINI 💡 대형 -->
+<rect x="162" y="50" width="210" height="84" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" onclick="goCar('bmw')" style="cursor:pointer"/>
+<text x="267" y="70" text-anchor="middle" font-size="7" fill="#92400E" font-weight="700">W402 · W403</text>
+<text x="235" y="92" text-anchor="middle" font-size="14" fill="#92400E" font-weight="800">💡 BMW</text>
+<text x="320" y="92" text-anchor="middle" font-size="11" fill="#B45309" font-weight="700">MINI</text>
+<text x="267" y="108" text-anchor="middle" font-size="7" fill="#B45309">iX3L Neue Klasse</text>
+<text x="267" y="120" text-anchor="middle" font-size="6" fill="#EA580C">탭→상품정보</text>
+<!-- 구분선 -->
+<line x1="68" y1="141" x2="372" y2="141" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- 하단: W404·W405·W406·W407·W408 -->
+<rect x="68" y="149" width="82" height="69" rx="4" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1.5"/>
+<text x="109" y="172" text-anchor="middle" font-size="7" fill="#6B7280" font-weight="700">W404</text>
+<text x="109" y="190" text-anchor="middle" font-size="11" fill="#6B7280" font-weight="800">保时捷</text>
+<text x="109" y="205" text-anchor="middle" font-size="7" fill="#9CA3AF">PORSCHE</text>
+<rect x="154" y="149" width="52" height="69" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="180" y="171" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W405</text>
+<text x="180" y="186" text-anchor="middle" font-size="7" fill="#9CA3AF">丰田纺织</text>
+<text x="180" y="198" text-anchor="middle" font-size="6" fill="#9CA3AF">Boshoku</text>
+<rect x="210" y="149" width="46" height="69" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="233" y="171" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W406</text>
+<text x="233" y="186" text-anchor="middle" font-size="8" fill="#9CA3AF">傲旋</text>
+<text x="233" y="198" text-anchor="middle" font-size="6" fill="#9CA3AF">AUXUN</text>
+<rect x="260" y="149" width="60" height="69" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="290" y="171" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W407</text>
+<text x="290" y="188" text-anchor="middle" font-size="9" fill="#9CA3AF">莲花</text>
+<text x="290" y="201" text-anchor="middle" font-size="7" fill="#9CA3AF">LOTUS</text>
+<rect x="324" y="149" width="48" height="30" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="348" y="162" text-anchor="middle" font-size="6" fill="#6B7280" font-weight="700">W408</text>
+<text x="348" y="174" text-anchor="middle" font-size="6" fill="#9CA3AF">移远通信</text>
+<text x="190" y="232" text-anchor="middle" font-size="8" fill="#EF4444" font-weight="700">▲ 입구/출구</text>
+<rect x="4" y="238" width="372" height="16" rx="4" fill="#FEF3C7"/>
+<text x="190" y="249" text-anchor="middle" font-size="8" fill="#92400E" font-weight="700">⏱ 예상 소요: 20분 (💡 BMW iX3L W402~403)</text>
+</svg>`;}
 
 // ─── 홀 렌더링 ────────────────────────────────────────────────────────────────
 function goHall(id){
